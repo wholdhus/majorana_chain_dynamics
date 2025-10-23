@@ -1,0 +1,66 @@
+using ITensors, ITensorMPS
+let
+    # Create L Spin-1/2 Indices
+    L = 10
+    sites = siteinds("S=1/2", L)
+
+    # Create the Hamiltonian of the Ising chain at its self-dual critical point from the O'Brien and Fendley paper.
+    osI = OpSum()
+    for j in 1:(L - 1)
+        osI -= "X", j 
+        osI -= "Z", j, "Z", j + 1
+    end
+    HI = MPO(osI, sites)
+
+    # Create the Hamiltonian of the three-spin interaction from the O'Brien and Fendley paper.
+    os3 = OpSum()
+    for j in 1:(L - 2)
+        os3 += "X", j, "Z", j + 1, "Z", j + 2
+        os3 += "Z", j, "Z", j + 1, "X", j + 2
+    end
+    H3 = MPO(os3, sites)
+
+    # Coupling coefficients for Exact G.S.
+        lambdaI = 1
+        lambda3 = 1
+    
+    # Coupling coefficients for TCI such that lambda3 / lambdaI = 0.856
+        # lambdaI = 0.759685
+        # lambda3 = 0.650291
+    
+    # Energy offset
+    EO = L * (lambdaI^2 + lambda3^2) / lambda3
+
+    # Adding the energy offset to just one site
+    osEO = OpSum()
+        osEO += EO, "Id", 1 # "Id" is the identity operator
+    E0 = MPO(osEO, sites)
+
+    # Full Hamiltonian from paper
+    H = 2 * lambdaI * HI + lambda3 * H3 + E0
+
+    # Create an initial random matrix product state
+    psi0 = random_mps(sites)
+    nsweeps = 10
+    
+    # Scaling maxdim logarithmically with L
+    function get_log_maxdim(L; min_dim=50, max_dim=2000, base=1.5)
+        bond_dim = min(round(Int, min_dim * base^(log2(L/8))), max_dim)
+        return max(bond_dim, min_dim)
+    end
+
+    function get_auto_maxdim(L; nsweeps)
+        final_dim = get_log_maxdim(L)
+        return round.(Int, range(50, final_dim, nsweeps))
+    end
+
+    maxdim = get_auto_maxdim(L; nsweeps=nsweeps)
+    cutoff = 1.0e-10
+
+    # Run the DMRG algorithm, returning energy
+    # (dominant eigenvalue) and optimized MPS
+    energy, psi = dmrg(H, psi0; nsweeps, maxdim, cutoff)
+    println("Final energy = $energy")
+
+    nothing
+end
