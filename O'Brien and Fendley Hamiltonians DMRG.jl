@@ -22,12 +22,12 @@ let
     H_3 = MPO(os3, sites)
 
     # Coupling coefficients
-    lambdaI = 0.431
-    lambda3 = 0.369
-    # Such that lambda3 / lambdaI = 0.856
+    lambdaI = 1
+    lambda3 = 1
+    # Both equal one is when we are at the ground state
 
     # Initial energy offset
-    L = 2
+    L = N
     E0 = L * (lambdaI^2 + lambda3^2) / lambda3
 
     # Making the initial energy offset a matrix product operator to match the Hamiltonians
