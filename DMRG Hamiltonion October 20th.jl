@@ -61,7 +61,7 @@ let
     nothing
 end
 
-# Getting four degenerate states with an energy of -104, as we don't have the offset.
+# Getting four degenerate states with an energy of -104, as we don't have an offset.
 # Computation time is very long at over ten minutes.
 # The overlap for different wavefunctions is not as precise as I would like; ~10^-3 accuracy.
 # https://docs.itensor.org/ITensorMPS/stable/Observer.html may limit the number of sweeps and dimensions

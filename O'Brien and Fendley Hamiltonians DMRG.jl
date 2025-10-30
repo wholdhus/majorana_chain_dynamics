@@ -1,7 +1,7 @@
 using ITensors, ITensorMPS
 let
     # Create spin-1/2 indices
-    N = 50
+    N = 40
     sites = siteinds("S=1/2", N)
 
     # Create the Hamiltonian of the Ising chain at its self-dual critical point
@@ -23,35 +23,31 @@ let
         os_3 += "X", j, "Z", j + 1, "Z", j + 2
         os_3 += "Z", j, "Z", j + 1, "X", j + 2
     end
-    # Boundary conditions
-    os_3 += "X", N - 1, "Z", N, "Z", 1 # j = N - 1
+    os_3 += "X", N - 1, "Z", N, "Z", 1
+    os_3 += "X", N, "Z", 1, "Z", 2
     os_3 += "Z", N - 1, "Z", N, "X", 1
-    os_3 += "X", N, "Z", 1, "Z", 2 # j = N
     os_3 += "Z", N, "Z", 1, "X", 2
     
     H_3 = MPO(os_3, sites)
 
     # Coupling coefficients
-    lambdaI = 1
-    lambda3 = 1
+    lambda_I = 1
+    lambda_3 = 1
     # Both equal one is when we are at the ground state
 
     # Initial energy offset
-    L = N
-    E0 = L * (lambdaI^2 + lambda3^2) / lambda3
+    E0 = N * (lambda_I^2 + lambda_3^2) / lambda_3
 
     # Making the initial energy offset a matrix product operator to match the Hamiltonians
     osE0 = OpSum()
-    for j in 1:N
-        osE0 += E0, "Id", j   # "Id" is the identity matrix
-    end
+        osE0 += E0, "Id", 1
     E0MPO = MPO(osE0, sites)
 
     # Full Hamiltonian from the paper
-    H = 2 * lambdaI * H_I + lambda3 * H_3 + E0MPO
+    H = 2 * lambda_I * H_I + lambda_3 * H_3 + E0MPO
 
     # Create an initial random matrix product state
-    psi0 = random_mps(sites;linkdims=10)
+    psi0 = random_mps(sites)
 
     # Sweeps and maximum dimensions
     nsweeps = 10
