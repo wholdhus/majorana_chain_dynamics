@@ -53,7 +53,7 @@ let
 
     # Sweeps and maximum dimensions
     nsweeps = 12
-    maxdim = [10, 25, 50, 75, 100, 250, 500, 1000, 2500, 5000]
+    maxdim = [10, 25, 50, 100, 250, 500, 1000, 2500, 5000]
     cutoff = 1.0e-15
 
     # Outputs
