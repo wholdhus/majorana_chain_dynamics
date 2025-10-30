@@ -33,10 +33,10 @@ let
         
     H = MPO(os, sites)
     
-    psi0 = random_mps(sites;linkdims=10)
-    nsweeps = 8
-    maxdim = [5, 10, 50, 100, 500, 1000]
-    cutoff = 1.0e-10
+    psi0 = random_mps(sites)
+    nsweeps = 12
+    maxdim = [10, 25, 50, 75, 100, 250, 500, 1000, 2500, 5000]
+    cutoff = 1.0e-15
 
     energy1, psi1 = dmrg(H, psi0; nsweeps, maxdim, cutoff)
     energy2, psi2 = dmrg(H, [psi1], psi0; nsweeps, maxdim, cutoff, weight = 100)

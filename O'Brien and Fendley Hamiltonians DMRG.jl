@@ -40,7 +40,9 @@ let
 
     # Making the initial energy offset a matrix product operator to match the Hamiltonians
     osE0 = OpSum()
-        osE0 += E0, "Id", 1
+    for j in 1:N
+        osE0 += (E0 / N), "Id", j
+    end
     E0MPO = MPO(osE0, sites)
 
     # Full Hamiltonian from the paper
@@ -50,9 +52,9 @@ let
     psi0 = random_mps(sites)
 
     # Sweeps and maximum dimensions
-    nsweeps = 10
-    maxdim = [5, 10, 25, 50, 100, 500, 1000]
-    cutoff = 1.0e-10
+    nsweeps = 12
+    maxdim = [10, 25, 50, 75, 100, 250, 500, 1000, 2500, 5000]
+    cutoff = 1.0e-15
 
     # Outputs
     energy1, psi1 = dmrg(H, psi0; nsweeps, maxdim, cutoff)
