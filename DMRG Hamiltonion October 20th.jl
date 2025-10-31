@@ -36,7 +36,7 @@ let
     psi0 = random_mps(sites)
     nsweeps = 12
     maxdim = [10, 25, 50, 100, 250, 500, 1000, 2500, 5000]
-    cutoff = 1.0e-15
+    cutoff = 1.0e-12
 
     energy1, psi1 = dmrg(H, psi0; nsweeps, maxdim, cutoff)
     energy2, psi2 = dmrg(H, [psi1], psi0; nsweeps, maxdim, cutoff, weight = 100)
