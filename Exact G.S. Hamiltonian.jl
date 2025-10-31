@@ -1,4 +1,5 @@
-using ITensors, ITensorMPS
+using ITensors, ITensorMPS, PythonPlot
+
 let
     # Create L Spin-1/2 Indices
     L = 20
@@ -48,20 +49,9 @@ let
     # Create an initial random matrix product state
     psi0 = random_mps(sites)
     nsweeps = 20
-    
-    # Scaling maxdim logarithmically with L
-    function get_log_maxdim(L; min_dim=50, max_dim=2000, base=1.5)
-        bond_dim = min(round(Int, min_dim * base^(log2(L/8))), max_dim)
-        return max(bond_dim, min_dim)
-    end
 
-    function get_auto_maxdim(L; nsweeps)
-        final_dim = get_log_maxdim(L)
-        return round.(Int, range(50, final_dim, nsweeps))
-    end
-
-    maxdim = get_auto_maxdim(L; nsweeps=nsweeps)
-    mindim = maxdim
+    maxdim = [10, 33, 66, 133, 200]
+    mindim = [10, 10, 33, 66, 100]
     cutoff = 1.0e-10
 
     # Run the DMRG algorithm, returning energy
@@ -74,16 +64,21 @@ let
     energy3, psi3 = dmrg(H, [psi1, psi2], psi0; nsweeps, mindim, maxdim, cutoff, weight = 100)
     energy4, psi4 = dmrg(H, [psi1, psi2, psi3], psi0; nsweeps, mindim, maxdim, cutoff, weight = 100)
     
-    println("Final energy = $energy1")
-    println("Final energy = $energy2")
-    println("Final energy = $energy3")
-    println("Final energy = $energy4")
-    println("Overlap = $(inner(psi1, psi1))")
-    println("Overlap = $(inner(psi1, psi2))")
-    println("Overlap = $(inner(psi1, psi3))")
-    println("Overlap = $(inner(psi1, psi4))")
-    println("Overlap = $(inner(psi2, psi3))")
-    println("Overlap = $(inner(psi2, psi4))")
+    println("Final Energy 1 = $energy1")
+    println("Final Energy 2 = $energy2")
+    println("Final Energy 3 = $energy3")
+    println("Final Energy 4 = $energy4")
+    
+    println("Overlap 1,1 = $(inner(psi1, psi1))")
+    println("Overlap 1,2 = $(inner(psi1, psi2))")
+    println("Overlap 1,3 = $(inner(psi1, psi3))")
+    println("Overlap 1,4 = $(inner(psi1, psi4))")
+    println("Overlap 2,3 = $(inner(psi2, psi3))")
+    println("Overlap 2,4 = $(inner(psi2, psi4))")
+    println("Overlap 3,4 = $(inner(psi3, psi4))")
+
+    # Compute Z-Z correlation matrix for the first G.S.
+    C1zz = correlation_matrix(psi1, "Z", "Z")
 
     nothing
 end
