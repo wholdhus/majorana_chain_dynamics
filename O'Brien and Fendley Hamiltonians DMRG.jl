@@ -79,7 +79,7 @@ let
 
     nothing
 end
-# With the cutoff at 1.0e-14 and 25 sites, it takes over two hours to run the code, assuming no problems.
+# With the cutoff at 1.0e-14 and 25 sites, it takes almost two hours to run the code, assuming no problems.
 # Energy 4 uses about 3700 diensions, taking significantly n=more time than the others, so we could probably
 # cut down on the accuracy, as long as we keep the three-fold degenerate zero energy levels for energies 1, 2, and 3.
 
