@@ -1,44 +1,92 @@
 using ITensors, ITensorMPS, DataFrames, CSV
+using LinearAlgebra
 
-function make_H0(L, sites)
+function make_H0(L, sites, bc)
     osI = OpSum()
     for j in 1:L
         osI -= "Z", j
-        osI -= "X", j, "X", mod1(j+1, L)
+    end    
+    for j in 1:L-1
+        osI -= "X", j, "X", j+1
+    end
+    
+    if bc == "PBC"
+        osI -= "X", L, "X", 1
+    elseif bc == "APBC"
+        osI += "X", L, "X", 1
     end
     return MPO(osI, sites)
 end
 
-function make_H3(L, sites)
+function make_H3(L, sites, bc)
     os3 = OpSum()
-    for j in 1:L
-        os3 += "Z", j, "X", mod1(j+1, L), "X", mod1(j+2, L)
-        os3 += "X", j, "X", mod1(j+1, L), "Z", mod1(j+2, L)
+    for j in 1:L-2
+        os3 += "Z", j, "X", j+1, "X", j+2
+        os3 += "X", j, "X", j+1, "Z", j+2
+    end
+    if bc == "PBC"
+        os3 += "Z", L-1, "X", L, "X", 1
+        os3 += "X", L-1, "X", L, "Z", 1
+
+        os3 += "Z", L, "X", 1, "X", 2
+        os3 += "X", L, "X", 1, "Z", 2
+    elseif bc == "APBC"
+        os3 -= "Z", L-1, "X", L, "X", 1
+        os3 += "X", L-1, "X", L, "Z", 1
+
+        os3 += "Z", L, "X", 1, "X", 2
+        os3 -= "X", L, "X", 1, "Z", 2
     end
     return MPO(os3, sites)
 end
 
-function build_trotter_gates(sites, tau, t1t, g)
+function local_H(t1, g, s1, s2, s3; signs=[1.0, 1.0, 1.0, 1.0])
+    X_part = -signs[1]*op("Z", s1) * op("Id", s2) * op("Id", s3)
+    H = 2*t1*X_part
+    if signs[2] != 0.0
+        ZZ_part = -signs[2]*op("X", s1) * op("X", s2) * op("Id", s3)
+        H += 2*t1*ZZ_part
+    end
+    # Build term for Three-spin part H3
+    if signs[3] != 0
+        H += g*signs[3]*op("Z", s1) * op("X", s2) * op("X", s3) 
+    end
+    if signs[4] != 0
+        H += g*signs[4]*op("X", s1) * op("X", s2) * op("Z", s3)
+    end
+    return H
+end
+
+function build_trotter_gates(sites, tau, t1, g, bc)
     L = length(sites)
     gates = ITensor[]
     
     # Forward sweep
-    for j in 1:L
-        s1, s2, s3 = sites[j], sites[mod1(j+1, L)], sites[mod1(j+2, L)]
-        
-        # Build term for Ising part HI
-        X_part = -(1/3) * (op("Z", s1) * op("Id", s2) * op("Id", s3) +
-                           op("Id", s1) * op("Z", s2) * op("Id", s3) +
-                           op("Id", s1) * op("Id", s2) * op("Z", s3))
-        ZZ_part = -op("X", s1) * op("X", s2) * op("Id", s3)
-        H0 = X_part + ZZ_part
-        
-        # Build term for Three-spin part H3
-        H3 = op("Z", s1) * op("X", s2) * op("X", s3) +
-             op("X", s1) * op("X", s2) * op("Z", s3)
-
-        # Define full Hamiltonian and create gate
-        H = 2*t1t*H0 + g*H3
+    for j in 1:L-2
+        H = local_H(t1, g,
+                    sites[j], sites[j+1], sites[j+2])
+        push!(gates, exp(-im * tau/2 * H))
+    end
+    if bc == "PBC"
+        H = local_H(t1, g,
+                    sites[L-1], sites[L], sites[1])
+        push!(gates, exp(-im * tau/2 * H))
+        H = local_H(t1, g,
+                    sites[L], sites[1], sites[2])
+        push!(gates, exp(-im * tau/2 * H))
+    elseif bc == "APBC"
+        H = local_H(t1, g,
+                    sites[L-1], sites[L], sites[1], signs=[1.0, 1.0, -1.0, 1.0])
+        push!(gates, exp(-im * tau/2 * H))
+        H = local_H(t1, g,
+                    sites[L], sites[1], sites[2], signs=[1.0, -1.0, 1.0, -1.0])
+        push!(gates, exp(-im * tau/2 * H))
+    else
+        H = local_H(t1, g,
+                    sites[L-1], sites[L], sites[1], signs=[1.0, 1.0, 0.0, 0.0])
+        push!(gates, exp(-im * tau/2 * H))
+        H = local_H(t1, g,
+                    sites[L], sites[1], sites[2], signs=[1.0, 0.0, 0.0, 0.0])
         push!(gates, exp(-im * tau/2 * H))
     end
     
@@ -47,7 +95,7 @@ function build_trotter_gates(sites, tau, t1t, g)
     return gates
 end
 
-function tebd_sim(L, t1, g, omega, periods, op_str, ind;
+function tebd_sim(L, bc, t1, g, omega, periods, op_str, ind;
                   parity=1,
                   steps_per_period=10,
                   cutoff=1e-9,
@@ -56,10 +104,17 @@ function tebd_sim(L, t1, g, omega, periods, op_str, ind;
                   maxdim=100,
                   eigsolve_krylovdim=10,
                   noise=[0.0])
+    if Threads.nthreads() > 1
+        BLAS.set_num_threads(1)
+        ITensors.Strided.set_num_threads(1)
+        println("Using threaded blocksparse with ", Threads.nthreads(), " threads!")
+        ITensors.enable_threaded_blocksparse(true)
+    end
+
     sites = siteinds("S=1/2", L, conserve_szparity=true)
 
-    H0 = make_H0(L, sites)
-    H3 = make_H3(L, sites)
+    H0 = make_H0(L, sites, bc)
+    H3 = make_H3(L, sites, bc)
     H = 2*t1*H0 + g*H3
     
     state = ["Up" for n=1:L]
@@ -67,7 +122,7 @@ function tebd_sim(L, t1, g, omega, periods, op_str, ind;
         println("Changing to odd parity")
         state[1] = "Dwn"
     end
-    psi0 = random_mps(sites, state)
+    psi0 = random_mps(sites, state, linkdims=4)
     
     observer = DMRGObserver(energy_tol=dmrg_tol)
     md = Int(round(maxdim/6))
@@ -84,7 +139,7 @@ function tebd_sim(L, t1, g, omega, periods, op_str, ind;
 
     O = op(op_str, sites[ind])
 
-    gate_sets = [build_trotter_gates(sites, tau, drive_t1(t), g) for t in ts]
+    gate_sets = [build_trotter_gates(sites, tau, drive_t1(t), g, bc) for t in ts]
 
     psi_t = copy(psi0)
     phi_t = apply(O, psi0)
@@ -92,9 +147,11 @@ function tebd_sim(L, t1, g, omega, periods, op_str, ind;
     steps = steps_per_period*periods + 1
     overlaps = zeros(Float64, steps)
     autocorrs = zeros(ComplexF64, steps)
+    maxdims = zeros(Int, steps)
 
     overlaps[1] = inner(psi_t, psi_t)
     autocorrs[1] = inner(phi_t, apply(O, psi_t))
+    maxdims[1] = maxlinkdim(psi_t)
 
     times = [tau*i for i=0:(steps-1)]
     for i in 2:steps
@@ -109,6 +166,7 @@ function tebd_sim(L, t1, g, omega, periods, op_str, ind;
 
         overlaps[i] = abs2(inner(psi_t, psi0))
         autocorrs[i] = inner(phi_t, apply(O, psi_t))
+        maxdims[i] = maxlinkdim(psi_t)
         println("Current max bond dimension: $(maxlinkdim(psi_t))")
         println("Max bond dimension of phi: $(maxlinkdim(phi_t))")
         println("|<psi(t)|psi(0)>|^2: $(overlaps[i])")
@@ -119,10 +177,11 @@ function tebd_sim(L, t1, g, omega, periods, op_str, ind;
     println("Done!")
 
     output = DataFrame("time" => times, 
-                       "overlap" => overlaps, 
+                       "overlap" => overlaps,
+                       "maxdims" => maxdims, 
                        "re_autoc" => real(autocorrs), 
                        "im_autoc" => imag(autocorrs))
-    fname = "L$(L)_g$(g)_omega$(omega)_N$(periods).csv"
+    fname = "L$(L)_$(bc)_g$(g)_omega$(omega)_N$(periods)_$(op_str)$(ind).csv"
     CSV.write(fname, output)
     println("Wrote data to $fname")
     return times, overlaps, autocorrs
