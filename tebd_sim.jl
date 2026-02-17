@@ -181,7 +181,7 @@ function tebd_sim(L, bc, t1, g, omega, periods, op_str, ind;
                        "maxdims" => maxdims, 
                        "re_autoc" => real(autocorrs), 
                        "im_autoc" => imag(autocorrs))
-    fname = "L$(L)_$(bc)_g$(g)_omega$(omega)_N$(periods)_$(op_str)$(ind).csv"
+    fname = "L$(L)_$(bc)_g$(g)_omega$(omega)_N$(periods)_steps$(steps_per_period)_$(op_str)$(ind).csv"
     CSV.write(fname, output)
     println("Wrote data to $fname")
     return times, overlaps, autocorrs
