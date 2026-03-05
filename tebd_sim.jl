@@ -186,5 +186,3 @@ function tebd_sim(L, bc, t1, g, omega, periods, op_str, ind;
     println("Wrote data to $fname")
     return times, overlaps, autocorrs
 end
-
-# Example usage: tebd_sim(L, bc, t1, g, omega, periods, op_str, ind)
