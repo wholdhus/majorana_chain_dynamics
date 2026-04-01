@@ -137,7 +137,6 @@ function dmrg_static(L, bc, t, g, parity, maxdim;
     fname = "L$(L)_$(bc)_t$(t)_g$(g)_parity$(parity)_maxdim$(maxdim[end]).csv"
     CSV.write(fname, output)
     println("\nWrote data to $fname")
-    # Correlation columns contain flattened L×L matrices; use reshape(vec, L, L) to recover
 
     return E1, E2, gap, XXC, XXCC, YYC, YYCC, ZZC, ZZCC
 end
