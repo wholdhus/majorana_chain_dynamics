@@ -1,0 +1,12 @@
+L: 6
+bc: "OBC"
+t: 1.0
+g: 1.1
+parity: 1
+maxdim: 400
+
+cutoff: 1e-9
+nsweeps: 20
+dmrg_tol: 1e-8
+eigsolve_krylovdim: 10
+noise: [0.0]
