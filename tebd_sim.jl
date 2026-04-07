@@ -42,10 +42,10 @@ end
 
 function local_H(t1, g, s1, s2, s3; signs=[1.0, 1.0, 1.0, 1.0])
     X_part = -signs[1]*op("Z", s1) * op("Id", s2) * op("Id", s3)
-    H = 2*t1*X_part
+    H = t1*X_part
     if signs[2] != 0.0
         ZZ_part = -signs[2]*op("X", s1) * op("X", s2) * op("Id", s3)
-        H += 2*t1*ZZ_part
+        H += t1*ZZ_part
     end
     # Build term for Three-spin part H3
     if signs[3] != 0
@@ -96,6 +96,7 @@ function build_trotter_gates(sites, tau, t1, g, bc)
 end
 
 function tebd_sim(L, bc, t1, g, omega, periods, op_str, ind;
+                  fname="",
                   parity=1,
                   steps_per_period=10,
                   cutoff=1e-9,
@@ -115,7 +116,7 @@ function tebd_sim(L, bc, t1, g, omega, periods, op_str, ind;
 
     H0 = make_H0(L, sites, bc)
     H3 = make_H3(L, sites, bc)
-    H = 2*t1*H0 + g*H3
+    H = t1*H0 + g*H3
     
     state = ["Up" for n=1:L]
     if parity == -1
@@ -126,10 +127,16 @@ function tebd_sim(L, bc, t1, g, omega, periods, op_str, ind;
     
     observer = DMRGObserver(energy_tol=dmrg_tol)
     md = Int(round(maxdim/6))
-    maxdim = [md, 2*md, 3*md, 4*md, 5*md, maxdim]
+    maxdim = [min(md, 10), min(md, 20), md, 2*md, 3*md, 4*md, 5*md, maxdim]
+
+    println(maxdim)
+
     E0, psi0 = dmrg(H, psi0; nsweeps, maxdim, cutoff, observer, outputlevel=1, noise, eigsolve_krylovdim)
     
     println("DMRG Finished! E0 = $(E0), psi0 maxdim = $(maxlinkdim(psi0))")
+    
+    truncate!(psi0; maxdim=maximum(maxdim), cutoff=cutoff)
+    println("After truncation, psi0 maxdim = $(maxlinkdim(psi0))")
     println("")
     drive_t1(t) = t1*cos(omega*t)
 
@@ -170,7 +177,7 @@ function tebd_sim(L, bc, t1, g, omega, periods, op_str, ind;
         println("Current max bond dimension: $(maxlinkdim(psi_t))")
         println("Max bond dimension of phi: $(maxlinkdim(phi_t))")
         println("|<psi(t)|psi(0)>|^2: $(overlaps[i])")
-        println("<O(t)|O(o)>^2: $(autocorrs[i])")
+        println("<O(t)|O(o)>: $(autocorrs[i])")
         println()
     end
     println("")
@@ -181,7 +188,109 @@ function tebd_sim(L, bc, t1, g, omega, periods, op_str, ind;
                        "maxdims" => maxdims, 
                        "re_autoc" => real(autocorrs), 
                        "im_autoc" => imag(autocorrs))
-    fname = "L$(L)_$(bc)_g$(g)_omega$(omega)_N$(periods)_steps$(steps_per_period)_$(op_str)$(ind).csv"
+    if fname == ""
+        fname = "L$(L)_$(bc)_g$(g)_omega$(omega)_N$(periods)_steps$(steps_per_period)_$(op_str)$(ind).csv"
+    end
+    CSV.write(fname, output)
+    println("Wrote data to $fname")
+    return times, overlaps, autocorrs
+end
+
+
+function kz_sim(L, bc, t0, tf, g, v, steps, op_str, ind;
+                fname="",
+                parity=1,
+                steps_per_period=10,
+                cutoff=1e-9,
+                nsweeps=20,
+                dmrg_tol=1e-8,
+                maxdim=100,
+                eigsolve_krylovdim=10,
+                noise=[0.0])
+    if Threads.nthreads() > 1
+        BLAS.set_num_threads(1)
+        ITensors.Strided.set_num_threads(1)
+        println("Using threaded blocksparse with ", Threads.nthreads(), " threads!")
+        ITensors.enable_threaded_blocksparse(true)
+    end
+
+    sites = siteinds("S=1/2", L, conserve_szparity=true)
+
+    H0 = make_H0(L, sites, bc)
+    H3 = make_H3(L, sites, bc)
+    H = t0*H0 + g*H3
+    
+    state = ["Up" for n=1:L]
+    if parity == -1
+        println("Changing to odd parity")
+        state[1] = "Dwn"
+    end
+    psi0 = random_mps(sites, state, linkdims=4)
+    
+    observer = DMRGObserver(energy_tol=dmrg_tol)
+    md = Int(round(maxdim/6))
+    maxdim = [min(md, 10), min(md, 20), md, 2*md, 3*md, 4*md, 5*md, maxdim]
+
+    println(maxdim)
+
+    E0, psi0 = dmrg(H, psi0; nsweeps, maxdim, cutoff, observer, outputlevel=1, noise, eigsolve_krylovdim)
+    
+    println("DMRG Finished! E0 = $(E0), psi0 maxdim = $(maxlinkdim(psi0))")
+    
+    truncate!(psi0; maxdim=maximum(maxdim), cutoff=cutoff)
+    println("After truncation, psi0 maxdim = $(maxlinkdim(psi0))")
+    println("")
+
+    T = 1/v
+    tau = T/steps
+    dt = (tf-t0)/steps
+
+    O = op(op_str, sites[ind])
+
+    psi_t = copy(psi0)
+    phi_t = apply(O, psi0)
+
+    overlaps = zeros(Float64, steps+1)
+    autocorrs = zeros(ComplexF64, steps+1)
+    maxdims = zeros(Int, steps+1)
+
+    overlaps[1] = inner(psi_t, psi_t)
+    autocorrs[1] = inner(phi_t, apply(O, psi_t))
+    maxdims[1] = maxlinkdim(psi_t)
+
+    times = [tau*i for i=0:steps]
+    ts = [t0+i*dt for i=0:steps]
+    for i in 2:steps+1
+        t = ts[i]
+        println("time = $(times[i])")
+        println("t(ham) = $(t)")
+        gates = build_trotter_gates(sites, tau, t-dt/2, g, bc)
+        psi_t = apply(gates, psi_t; cutoff=cutoff, maxdim=maximum(maxdim))
+        normalize!(psi_t)
+        phi_t = apply(gates, phi_t; cutoff=cutoff, maxdim=maximum(maxdim))
+        normalize!(phi_t)
+
+        overlaps[i] = abs2(inner(psi_t, psi0))
+        autocorrs[i] = inner(phi_t, apply(O, psi_t))
+        maxdims[i] = maxlinkdim(psi_t)
+        println("Current max bond dimension: $(maxlinkdim(psi_t))")
+        println("Max bond dimension of phi: $(maxlinkdim(phi_t))")
+        println("|<psi(t)|psi(0)>|^2: $(overlaps[i])")
+        println("<O(t)|O(o)>: $(autocorrs[i])")
+        println()
+    end
+    println("")
+    println("Done!")
+
+    output = DataFrame("time" => times, 
+                       "ts" => 
+                       "overlap" => overlaps,
+                       "maxdims" => maxdims, 
+                       "re_autoc" => real(autocorrs), 
+                       "im_autoc" => imag(autocorrs))
+    if fname == ""
+        fname = "L$(L)_bc$(bc)_t0$(t0)_tf$(tf)_g$(g)_v$(v)_steps$(steps)_$(op_str)$(ind).csv"
+    end
     CSV.write(fname, output)
     println("Wrote data to $fname")
     return times, overlaps, autocorrs
