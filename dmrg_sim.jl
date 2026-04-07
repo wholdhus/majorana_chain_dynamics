@@ -1,7 +1,27 @@
 using ITensors, ITensorMPS, HDF5
 using LinearAlgebra
 using YAML
-include("tebd_sim.jl")
+include("operators.jl")
+
+function entropy(state, bond; spectrum=false)
+	s_orth = orthogonalize(state, bond)
+	U,S,V = svd(s_orth[bond], 
+				(linkinds(s_orth, bond-1)..., 
+				 siteinds(s_orth, bond)...))
+	SvN = 0.0
+	ps = zeros(dim(S, 1))
+	for n=1:dim(S, 1)
+		p = S[n,n]^2
+		SvN -= p * log(p)
+		ps[n] = p
+	end
+	if spectrum
+		return SvN, ps
+	else
+		return SvN
+	end
+end
+
 
 function gs_dmrg(L, bc, parity,
                  t0, g;
