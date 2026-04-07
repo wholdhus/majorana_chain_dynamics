@@ -1,21 +1,16 @@
-using ITensors, ITensorMPS, DataFrames, CSV
+using ITensors, ITensorMPS, HDF5
 using LinearAlgebra
+using YAML
 include("tebd_sim.jl")
 
-function gs_dmrg(L, bc, t0, g;
-                 parity=1,
+function gs_dmrg(L, bc, parity,
+                 t0, g;
                  cutoff=1e-9,
                  nsweeps=20,
                  dmrg_tol=1e-8,
                  m=100,
                  eigsolve_krylovdim=10,
                  noise=[0.0])
-    if Threads.nthreads() > 1
-        BLAS.set_num_threads(1)
-        ITensors.Strided.set_num_threads(1)
-        println("Using threaded blocksparse with ", Threads.nthreads(), " threads!")
-        ITensors.enable_threaded_blocksparse(true)
-    end
 
     sites = siteinds("S=1/2", L, conserve_szparity=true)
 
@@ -40,21 +35,16 @@ function gs_dmrg(L, bc, t0, g;
    return E0, psi0
 end
 
-function es_dmrg(L, bc, t0, g, psis;
+function es_dmrg(L, bc, parity,
+                 t0, g, 
+                 psis;
                  weight=100,
-                 parity=1,
                  cutoff=1e-9,
                  nsweeps=20,
                  dmrg_tol=1e-8,
                  m=100,
                  eigsolve_krylovdim=10,
                  noise=[0.0])
-    if Threads.nthreads() > 1
-        BLAS.set_num_threads(1)
-        ITensors.Strided.set_num_threads(1)
-        println("Using threaded blocksparse with ", Threads.nthreads(), " threads!")
-        ITensors.enable_threaded_blocksparse(true)
-    end
 
     sites = siteinds(psis[1])
 
@@ -78,103 +68,92 @@ function es_dmrg(L, bc, t0, g, psis;
    return E, psi
 end
 
-function get_energies(L, bc, t0, gs, nstates;
-                      weight=100,
-                      parity=1,
-                      cutoff=1e-9,
-                      nsweeps=20,
-                      dmrg_tol=1e-8,
-                      m=100,
-                      eigsolve_krylovdim=10,
-                      noise=[0.0])
-    energies = zeros((length(gs), nstates))
-    for (i, g) in enumerate(gs)
-        println("g = $g")
-        e0, v0 = gs_dmrg(L, bc, t0, g;
-                         parity,
-                         cutoff,
-                         nsweeps,
-                         dmrg_tol,
-                         m,
-                         eigsolve_krylovdim,
-                         noise)
-        vs = [v0]
-        es = [e0]
-        println("e0: $(e0)")
-        println()
-        for j in 1:(nstates-1)
-            ej, vj = es_dmrg(L, bc, t0, g, vs;
-                             weight,
-                             parity,
-                             cutoff,
-                             nsweeps,
-                             dmrg_tol,
-                             m,
-                             eigsolve_krylovdim,
-                             noise)
-            println("e$(j): $(ej)")
-            println()
-            push!(vs, vj)
-            push!(es, ej)
+function get_energies_measure_save(L, bc, parity, t, g, nstates, fname;
+                                   weight=100,
+                                   cutoff=1e-9,
+                                   nsweeps=20,
+                                   dmrg_tol=1e-8,
+                                   m=100,
+                                   eigsolve_krylovdim=10,
+                                   noise=[0.0])
+    e0, v0 = gs_dmrg(L, bc, parity,
+                     t, g;
+                     cutoff,
+                     nsweeps,
+                     dmrg_tol,
+                     m,
+                     eigsolve_krylovdim,
+                     noise)
+    vs = [v0]
+    es = [e0]
+    println("e0: $(e0)")
+    println()
+    for j in 1:(nstates-1)
+        ej, vj = es_dmrg(L, bc, parity,
+                         t, g, vs;
+                            weight,
+                            cutoff,
+                            nsweeps,
+                            dmrg_tol,
+                            m,
+                            eigsolve_krylovdim,
+                            noise)
+        println("e$(j): $(ej)")
+        push!(vs, vj)
+        push!(es, ej)
+        for k = 1:j
+            println("Overlap |<$(k)|$(j+1)>|")
+            println(abs(inner(vs[k], vj)))
         end
-        energies[i,:] = es
-        println("Energies for g = $(g): $(energies[i,:])")
         println()
     end
-    return gs, energies
+    println("Energies: $(es)")
+    i0 = argmin(es)
+    psi0 = vs[i0]
+    println("i0: $(i0)")
+    z = expect(psi0, "Sz")
+    println(z)
+    xx = correlation_matrix(psi0, "Sx","Sx")    
+    yy = correlation_matrix(psi0, "Sx","Sx")
+    zz = correlation_matrix(psi0, "Sz","Sz")
+    entropies = [entropy(psi0, i) for i = 1:L]
+    h5open(fname, "w") do fid
+        fid["energies"] = sort(es)
+        fid["t"] = t
+        fid["g"] = g
+        fid["bc"] = bc
+        fid["parity"] = parity
+        fid["z"] = z
+        fid["xx"] = xx
+        fid["yy"] = yy
+        fid["zz"] = zz
+        fid["entropies"] = entropies
+    end
 end
 
-function get_energies_theta(L, bc, steps, nstates;
-                            weight=100,
-                            parity=1,
-                            cutoff=1e-9,
-                            nsweeps=20,
-                            dmrg_tol=1e-8,
-                            m=100,
-                            eigsolve_krylovdim=10,
-                            noise=[0.0])
-    ets = zeros(steps, nstates)
-    thetas = LinRange(0, pi, steps)
-    ts = sin.(thetas)
-    gs = cos.(thetas)
-    println("thetas:")
-    println(thetas)
-    println("gs:")
-    println(gs)
-    println("ts:")
-    println(ts)
-    for i in 1:steps
-        println("g = $(gs[i]), t = $(ts[i])")
-        e0, v0 = gs_dmrg(L, bc, ts[i], gs[i];
-                         parity,
-                         cutoff,
-                         nsweeps,
-                         dmrg_tol,
-                         m,
-                         eigsolve_krylovdim,
-                         noise)
-        vs = [v0]
-        es = [e0]
-        println("e0: $(e0)")
-        println()
-        for j in 1:(nstates-1)
-            ej, vj = es_dmrg(L, bc, ts[i], gs[i], vs;
-                             weight,
-                             parity,
-                             cutoff,
-                             nsweeps,
-                             dmrg_tol,
-                             m,
-                             eigsolve_krylovdim,
-                             noise)
-            println("e$(j): $(ej)")
-            println()
-            push!(vs, vj)
-            push!(es, ej)
-        end
-        ets[i,:] = es
-        println("Energies for g = $(gs[i]), t = $(ts[i]): $(ets[i,:])")
-        println()
+function main()
+    if Threads.nthreads() > 1
+        BLAS.set_num_threads(1)
+        ITensors.Strided.set_num_threads(1)
+        println("Using threaded blocksparse with ", Threads.nthreads(), " threads!")
+        ITensors.enable_threaded_blocksparse(true)
     end
-    return thetas, ets
+    params = YAML.load_file(ARGS[1])
+    println("Params: ")
+    display(params)
+    L = params["L"]
+    bc = params["bc"]
+    parity = params["parity"]
+    t = params["t"]
+    g = params["g"]
+    nstates = params["nstates"]
+    fname = params["fname"]
+    dmrg_params = params["dmrg_params"]
+    dmrg_params = Dict(Symbol(k) => v for (k,v) in dmrg_params)
+    get_energies_measure_save(L, bc, parity,
+                              t, g, nstates, fname; dmrg_params...)
+end
+
+if ARGS != []
+    main()
 end
