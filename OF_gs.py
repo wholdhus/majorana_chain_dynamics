@@ -14,7 +14,7 @@ gs = np.round(np.linspace(-0.5, 3.5, steps), 4)
 parities = {"even": 1,
             "odd": -1}
 nstates = 5
-bc = 1
+bc = "OBC"
 kdim = 15
 nsweeps = 40
 cutoff = 1E-8
