@@ -1,0 +1,12 @@
+Universe   = vanilla
+Executable = /cluster/home/holdhuw/of_dmrg8.sh
+Output     = out.$(Process)
+Error      = err.$(Process)
+Log        = condor.log
+
+Request_Cpus   = 4
+Request_Memory = 5GB
+Priority = 5
+
+Initialdir = $(dirname)
+Queue dirname matching dirs /cluster/research-groups/rahmani/Will/obrian_fendley/L12_pbc_m300_thetas/*/
