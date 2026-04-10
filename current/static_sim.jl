@@ -7,20 +7,20 @@ function main()
     println("Reading parameters from $params_file")
     params = YAML.load_file(params_file)
 
-    # Parameters
-    L       = params["L"]
-    bc      = params["bc"]
-    t       = params["t"]
-    g       = params["g"]
-    parity  = params["parity"]
-    maxdim  = params["maxdim"]
+    L      = params["L"]
+    bc     = params["bc"]
+    t      = params["t"]
+    g      = params["g"]
+    parity = params["parity"]
+    maxdim = params["maxdim"]
 
-    # Parameters with default values
-    cutoff  = get(params, "cutoff", 1e-9)
-    nsweeps = get(params, "nsweeps", 20)
-    dmrg_tol = get(params, "dmrg_tol", 1e-8)
-    eigsolve_krylovdim = get(params, "eigsolve_krylovdim", 10)
-    noise   = get(params, "noise", [0.0])
+    dmrg_params = get(params, "dmrg_params", Dict())
+
+    cutoff             = get(dmrg_params, "cutoff", 1e-9)
+    nsweeps            = get(dmrg_params, "nsweeps", 20)
+    dmrg_tol           = get(dmrg_params, "dmrg_tol", 1e-8)
+    eigsolve_krylovdim = get(dmrg_params, "eigsolve_krylovdim", 10)
+    noise              = get(dmrg_params, "noise", [0.0])
 
     println("Running DMRG with:")
     println("  L=$L bc=$bc t=$t g=$g parity=$parity maxdim=$maxdim")
