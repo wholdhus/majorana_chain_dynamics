@@ -131,6 +131,7 @@ function get_energies_measure_save(L, bc, parity, t, g, nstates, fname;
     i0 = argmin(es)
     psi0 = vs[i0]
     println("i0: $(i0)")
+    println("z")
     z = expect(psi0, "Sz")
     println(z)
     xx = correlation_matrix(psi0, "Sx","Sx")    

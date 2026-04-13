@@ -67,7 +67,7 @@ function tebd_sim(L, bc, t1, g, omega, periods, op_str, ind;
     state = ["Up" for n=1:L]
     if parity == -1
         println("Changing to odd parity")
-        state[1] = "Dwn"
+        state[1] = "Dn"
     end
     psi0 = random_mps(sites, state, linkdims=4)
     
@@ -169,7 +169,7 @@ function kz_sim(L, bc, t0, tf, g, v, steps, op_str, ind;
     state = ["Up" for n=1:L]
     if parity == -1
         println("Changing to odd parity")
-        state[1] = "Dwn"
+        state[1] = "Dn"
     end
     psi0 = random_mps(sites, state, linkdims=4)
     
