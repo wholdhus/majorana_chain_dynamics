@@ -130,13 +130,13 @@ function get_energies_measure_save(L, bc, parity, t, g, nstates, fname;
         fid["g"]         = g
         fid["bc"]        = bc
         fid["parity"]    = parity
-        fid["X"]         = X
-        fid["Y"]         = Y
-        fid["Z"]         = Z
-        fid["XX"]        = XX
-        fid["YY"]        = YY
-        fid["ZZ"]        = ZZ
-        fid["entropy"]   = entropies
+        fid["X"]         = reduce(vcat, [x' for x in X])
+        fid["Y"]         = reduce(vcat, [x' for x in Y])
+        fid["Z"]         = reduce(vcat, [x' for x in Z])
+        fid["XX"]        = reduce(vcat, XX)
+        fid["YY"]        = reduce(vcat, YY)
+        fid["ZZ"]        = reduce(vcat, ZZ)
+        fid["entropy"]   = reduce(vcat, [e' for e in entropies])
     end
 end
 

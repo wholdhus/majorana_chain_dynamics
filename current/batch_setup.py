@@ -12,7 +12,7 @@ nsweeps    = 20
 cutoff     = 1e-9
 energy_tol = 1e-8
 noise      = [0.0]
-nstates    = 1
+nstates    = 2
 
 steps = 101
 gs = np.round(np.linspace(0.5, 1.5, steps), 4)
