@@ -25,8 +25,8 @@ function main()
     noise              = get(dmrg_params, "noise", [0.0])
 
     println("Running DMRG with:")
-    println("  L=$L bc=$bc t=$t g=$g parity=$parity m=$m nstates=$nstates")
-    println("  fname=$fname")
+    println("  L = $L, bc = $bc, t = $t, g = $g, parity = $parity, m = $m, nstates = $nstates")
+    println("  fname = $fname")
 
     get_energies_measure_save(L, bc, parity, t, g, nstates, fname;
                               m=m,

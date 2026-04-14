@@ -7,4 +7,4 @@ Request_Cpus   = 8
 Request_Memory = 4GB
 Priority = 5
 Initialdir = $(dirname)
-Queue dirname matching dirs /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/L32_OBC_m200/*
+Queue dirname matching dirs /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/L32_OBC_m400/*

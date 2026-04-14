@@ -5,7 +5,7 @@ import yaml
 cwd = os.getcwd()
 
 L          = 32
-maxdim     = 200
+maxdim     = 400
 bc         = "OBC"
 kdim       = 15
 nsweeps    = 20
