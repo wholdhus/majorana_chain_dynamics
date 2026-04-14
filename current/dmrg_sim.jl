@@ -161,7 +161,3 @@ function main()
     get_energies_measure_save(L, bc, parity, t, g, nstates, fname; dmrg_params...)
     println("Done! Saved to $(fname)")
 end
-
-if ARGS != []
-    main()
-end
