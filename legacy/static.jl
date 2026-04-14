@@ -72,12 +72,12 @@ function dmrg_static(L, bc, t, g, parity, maxdim;
     sites = siteinds("S=1/2", L, conserve_szparity=true)
     H0 = make_H0(L, sites, bc)
     H3 = make_H3(L, sites, bc)
-    H = 2*t*H0 + g*H3
+    H = t*H0 + g*H3
     
     state = ["Up" for n=1:L]
     if parity == -1
         println("Changing to odd parity")
-        state[1] = "Dwn"
+        state[1] = "Down"
     end
     
     psi0 = random_mps(sites, state, linkdims=4)
