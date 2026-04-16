@@ -1,0 +1,28 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 32, bc = OBC, t = 1.0, g = 0.84, parity = -1, m = 400, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L32_OBC_m400/g0.84_podd/output.h5
+After sweep 1 energy=-35.50957945857793  maxlinkdim=10 maxerr=3.65E-05 time=49.326
+After sweep 2 energy=-35.53990932696203  maxlinkdim=20 maxerr=2.53E-06 time=2.545
+After sweep 3 energy=-35.54150689496237  maxlinkdim=61 maxerr=9.97E-10 time=4.191
+After sweep 4 energy=-35.54290439322867  maxlinkdim=109 maxerr=9.99E-10 time=9.819
+After sweep 5 energy=-35.54298667525035  maxlinkdim=85 maxerr=9.96E-10 time=9.924
+After sweep 6 energy=-35.542989329489515  maxlinkdim=81 maxerr=9.99E-10 time=8.878
+After sweep 7 energy=-35.54298935043165  maxlinkdim=81 maxerr=1.00E-09 time=8.456
+After sweep 8 energy=-35.54298935098423  maxlinkdim=81 maxerr=9.96E-10 time=8.434
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-35.42642438501018  maxlinkdim=10 maxerr=6.70E-05 time=4.625
+After sweep 2 energy=-35.48015195555625  maxlinkdim=20 maxerr=3.95E-06 time=3.028
+After sweep 3 energy=-35.50058800842721  maxlinkdim=67 maxerr=2.66E-09 time=4.913
+After sweep 4 energy=-35.50438487077613  maxlinkdim=89 maxerr=9.95E-10 time=10.954
+After sweep 5 energy=-35.50728200480432  maxlinkdim=106 maxerr=9.94E-10 time=11.086
+After sweep 6 energy=-35.517595373246536  maxlinkdim=137 maxerr=9.98E-10 time=12.447
+After sweep 7 energy=-35.53473330764419  maxlinkdim=156 maxerr=9.95E-10 time=13.364
+After sweep 8 energy=-35.53759592276258  maxlinkdim=103 maxerr=9.98E-10 time=13.790
+After sweep 9 energy=-35.53763275984718  maxlinkdim=84 maxerr=9.97E-10 time=10.255
+After sweep 10 energy=-35.53763300877311  maxlinkdim=84 maxerr=9.95E-10 time=9.870
+After sweep 11 energy=-35.53763301085967  maxlinkdim=84 maxerr=9.87E-10 time=9.781
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-35.54298935098423, -35.537633010859636]

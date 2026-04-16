@@ -1,0 +1,28 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 32, bc = OBC, t = 1.0, g = 1.08, parity = -1, m = 400, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L32_OBC_m400/g1.08_podd/output.h5
+After sweep 1 energy=-40.86759823348588  maxlinkdim=10 maxerr=3.06E-05 time=32.311
+After sweep 2 energy=-40.88700367954242  maxlinkdim=20 maxerr=2.71E-06 time=1.816
+After sweep 3 energy=-40.889420699933325  maxlinkdim=67 maxerr=1.50E-09 time=3.309
+After sweep 4 energy=-40.8904533686422  maxlinkdim=134 maxerr=1.88E-09 time=8.599
+After sweep 5 energy=-40.89086644408851  maxlinkdim=158 maxerr=1.00E-09 time=12.865
+After sweep 6 energy=-40.890947473872224  maxlinkdim=124 maxerr=1.00E-09 time=10.569
+After sweep 7 energy=-40.89095859202774  maxlinkdim=117 maxerr=9.99E-10 time=9.818
+After sweep 8 energy=-40.89095905901727  maxlinkdim=116 maxerr=9.97E-10 time=8.939
+After sweep 9 energy=-40.8909590795557  maxlinkdim=116 maxerr=9.98E-10 time=10.185
+After sweep 10 energy=-40.89095908124528  maxlinkdim=116 maxerr=9.91E-10 time=10.787
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-40.674741705512396  maxlinkdim=10 maxerr=5.82E-05 time=3.709
+After sweep 2 energy=-40.77808488400391  maxlinkdim=20 maxerr=6.52E-06 time=1.895
+After sweep 3 energy=-40.821152940122055  maxlinkdim=67 maxerr=1.68E-08 time=3.796
+After sweep 4 energy=-40.848682519463416  maxlinkdim=134 maxerr=2.62E-08 time=12.359
+After sweep 5 energy=-40.88302596983428  maxlinkdim=201 maxerr=5.33E-09 time=24.817
+After sweep 6 energy=-40.887497751320524  maxlinkdim=163 maxerr=9.99E-10 time=21.463
+After sweep 7 energy=-40.88756496526478  maxlinkdim=120 maxerr=9.99E-10 time=12.307
+After sweep 8 energy=-40.88756535487059  maxlinkdim=118 maxerr=9.97E-10 time=11.594
+After sweep 9 energy=-40.887565357341735  maxlinkdim=118 maxerr=9.79E-10 time=13.361
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-40.89095908124528, -40.88756535734174]

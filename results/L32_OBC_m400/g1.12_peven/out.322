@@ -1,0 +1,23 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 32, bc = OBC, t = 1.0, g = 1.12, parity = 1, m = 400, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L32_OBC_m400/g1.12_peven/output.h5
+After sweep 1 energy=-41.460988002116  maxlinkdim=10 maxerr=5.97E-05 time=36.364
+After sweep 2 energy=-41.51109201659026  maxlinkdim=20 maxerr=4.42E-06 time=1.889
+After sweep 3 energy=-42.211677948183386  maxlinkdim=52 maxerr=9.95E-10 time=3.045
+After sweep 4 energy=-42.21168578725757  maxlinkdim=58 maxerr=9.95E-10 time=4.364
+After sweep 5 energy=-42.211685828551374  maxlinkdim=58 maxerr=1.00E-09 time=4.498
+After sweep 6 energy=-42.21168582853589  maxlinkdim=58 maxerr=9.99E-10 time=4.570
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-41.42913328300707  maxlinkdim=10 maxerr=9.94E-05 time=3.183
+After sweep 2 energy=-41.5050079085453  maxlinkdim=20 maxerr=2.25E-05 time=2.050
+After sweep 3 energy=-41.51333001333332  maxlinkdim=67 maxerr=1.36E-08 time=3.679
+After sweep 4 energy=-41.51855706435637  maxlinkdim=134 maxerr=8.68E-09 time=12.635
+After sweep 5 energy=-41.519132494061445  maxlinkdim=201 maxerr=1.63E-09 time=23.931
+After sweep 6 energy=-41.519153695195705  maxlinkdim=196 maxerr=9.99E-10 time=26.523
+After sweep 7 energy=-41.51915384343826  maxlinkdim=196 maxerr=1.00E-09 time=25.530
+After sweep 8 energy=-41.519153843798826  maxlinkdim=196 maxerr=9.98E-10 time=25.868
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-42.21168582853589, -41.51915384379889]

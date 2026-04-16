@@ -1,0 +1,28 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 32, bc = OBC, t = 1.0, g = 1.26, parity = -1, m = 400, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L32_OBC_m400/g1.26_podd/output.h5
+After sweep 1 energy=-45.359597383713385  maxlinkdim=10 maxerr=5.81E-05 time=26.336
+After sweep 2 energy=-45.3987589077546  maxlinkdim=20 maxerr=5.25E-06 time=1.231
+After sweep 3 energy=-45.40158946977112  maxlinkdim=67 maxerr=2.78E-09 time=2.358
+After sweep 4 energy=-45.40208369954029  maxlinkdim=124 maxerr=9.96E-10 time=7.771
+After sweep 5 energy=-45.40258159853991  maxlinkdim=179 maxerr=1.00E-09 time=19.585
+After sweep 6 energy=-45.402803198999344  maxlinkdim=171 maxerr=9.99E-10 time=20.325
+After sweep 7 energy=-45.40287096171136  maxlinkdim=159 maxerr=9.99E-10 time=18.062
+After sweep 8 energy=-45.40288516409749  maxlinkdim=151 maxerr=9.99E-10 time=16.648
+After sweep 9 energy=-45.402887257040845  maxlinkdim=149 maxerr=9.98E-10 time=19.148
+After sweep 10 energy=-45.40288752728309  maxlinkdim=149 maxerr=1.00E-09 time=14.973
+After sweep 11 energy=-45.4028875662598  maxlinkdim=149 maxerr=9.98E-10 time=14.949
+After sweep 12 energy=-45.40288757355163  maxlinkdim=149 maxerr=9.86E-10 time=16.196
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-44.66992500262203  maxlinkdim=10 maxerr=8.70E-05 time=2.412
+After sweep 2 energy=-44.790051688543514  maxlinkdim=20 maxerr=1.48E-05 time=1.568
+After sweep 3 energy=-45.37169641367991  maxlinkdim=67 maxerr=3.13E-07 time=2.806
+After sweep 4 energy=-45.40045510968356  maxlinkdim=134 maxerr=2.52E-09 time=9.402
+After sweep 5 energy=-45.40048814504408  maxlinkdim=151 maxerr=1.00E-09 time=18.559
+After sweep 6 energy=-45.400488441876114  maxlinkdim=152 maxerr=9.97E-10 time=20.414
+After sweep 7 energy=-45.400488444503694  maxlinkdim=152 maxerr=9.89E-10 time=21.591
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-45.40288757355163, -45.40048844450372]

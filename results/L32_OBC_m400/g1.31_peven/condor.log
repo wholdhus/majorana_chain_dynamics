@@ -1,0 +1,40 @@
+000 (6918.360.000) 2026-04-15 19:42:51 Job submitted from host: <140.160.143.131:9618?addrs=140.160.143.131-9618&alias=cse-head.cluster.cs.wwu.edu&noUDP&sock=schedd_1483_cb0a>
+...
+001 (6918.360.000) 2026-04-16 00:31:04 Job executing on host: <140.160.143.148:9618?addrs=140.160.143.148-9618&alias=c-0-8.cluster.cs.wwu.edu&noUDP&sock=startd_1538_84bf>
+	SlotName: slot1_4@c-0-8.cluster.cs.wwu.edu
+	CondorScratchDir = "/var/lib/condor/execute/dir_1063864"
+	Cpus = 8
+	Disk = 2048
+	GPUs = 0
+	Memory = 4096
+...
+006 (6918.360.000) 2026-04-16 00:31:13 Image size of job updated: 251892
+	246  -  MemoryUsage of job (MB)
+	251892  -  ResidentSetSize of job (KB)
+...
+006 (6918.360.000) 2026-04-16 00:36:14 Image size of job updated: 913152
+	892  -  MemoryUsage of job (MB)
+	913152  -  ResidentSetSize of job (KB)
+...
+006 (6918.360.000) 2026-04-16 00:39:55 Image size of job updated: 1150204
+	892  -  MemoryUsage of job (MB)
+	913152  -  ResidentSetSize of job (KB)
+...
+005 (6918.360.000) 2026-04-16 00:39:55 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:26:06, Sys 0 00:00:05  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:26:06, Sys 0 00:00:05  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :     2.36        8         8 
+	   Disk (KB)            :     1           1      2048 
+	   GPUs                 :                           0 
+	   Memory (MB)          :   892        4096      4096 
+	   TimeExecute (s)      :   531                       
+	   TimeSlotBusy (s)     :   531                       
+...

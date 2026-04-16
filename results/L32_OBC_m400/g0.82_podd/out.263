@@ -1,0 +1,28 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 32, bc = OBC, t = 1.0, g = 0.82, parity = -1, m = 400, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L32_OBC_m400/g0.82_podd/output.h5
+After sweep 1 energy=-35.13657896953894  maxlinkdim=10 maxerr=2.76E-05 time=37.571
+After sweep 2 energy=-35.14630223624766  maxlinkdim=20 maxerr=2.31E-06 time=1.859
+After sweep 3 energy=-35.14816997167136  maxlinkdim=60 maxerr=9.90E-10 time=2.999
+After sweep 4 energy=-35.14957588997867  maxlinkdim=105 maxerr=1.00E-09 time=7.624
+After sweep 5 energy=-35.149646181916005  maxlinkdim=82 maxerr=9.99E-10 time=8.879
+After sweep 6 energy=-35.14964738401091  maxlinkdim=78 maxerr=9.93E-10 time=7.157
+After sweep 7 energy=-35.14964738660232  maxlinkdim=78 maxerr=1.00E-09 time=6.116
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-35.04631921240966  maxlinkdim=10 maxerr=4.41E-05 time=3.138
+After sweep 2 energy=-35.09166809805135  maxlinkdim=20 maxerr=3.67E-06 time=2.219
+After sweep 3 energy=-35.109552434178674  maxlinkdim=67 maxerr=2.57E-09 time=3.843
+After sweep 4 energy=-35.10986402396095  maxlinkdim=79 maxerr=9.96E-10 time=8.348
+After sweep 5 energy=-35.11020070363767  maxlinkdim=92 maxerr=9.97E-10 time=9.257
+After sweep 6 energy=-35.11204670954341  maxlinkdim=105 maxerr=1.00E-09 time=8.954
+After sweep 7 energy=-35.11914803092193  maxlinkdim=118 maxerr=9.97E-10 time=10.810
+After sweep 8 energy=-35.138992246989915  maxlinkdim=149 maxerr=9.96E-10 time=12.025
+After sweep 9 energy=-35.144007038351276  maxlinkdim=110 maxerr=1.00E-09 time=12.866
+After sweep 10 energy=-35.14408365523384  maxlinkdim=82 maxerr=9.98E-10 time=7.416
+After sweep 11 energy=-35.14408420025702  maxlinkdim=80 maxerr=1.00E-09 time=7.252
+After sweep 12 energy=-35.14408420437338  maxlinkdim=80 maxerr=9.90E-10 time=8.935
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-35.14964738660232, -35.144084204373385]

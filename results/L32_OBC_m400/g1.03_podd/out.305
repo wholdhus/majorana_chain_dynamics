@@ -1,0 +1,28 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 32, bc = OBC, t = 1.0, g = 1.03, parity = -1, m = 400, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L32_OBC_m400/g1.03_podd/output.h5
+After sweep 1 energy=-39.68071935266234  maxlinkdim=10 maxerr=4.29E-05 time=31.446
+After sweep 2 energy=-39.69639821939602  maxlinkdim=20 maxerr=2.91E-06 time=1.712
+After sweep 3 energy=-39.698577343459526  maxlinkdim=67 maxerr=1.12E-09 time=3.099
+After sweep 4 energy=-39.69977945295864  maxlinkdim=134 maxerr=1.15E-09 time=8.954
+After sweep 5 energy=-39.70013409678253  maxlinkdim=136 maxerr=9.99E-10 time=10.561
+After sweep 6 energy=-39.700180407500675  maxlinkdim=113 maxerr=9.96E-10 time=10.020
+After sweep 7 energy=-39.70018394073515  maxlinkdim=108 maxerr=1.00E-09 time=8.414
+After sweep 8 energy=-39.70018404970719  maxlinkdim=108 maxerr=9.99E-10 time=8.605
+After sweep 9 energy=-39.70018405417194  maxlinkdim=108 maxerr=9.98E-10 time=7.712
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-39.52152010450676  maxlinkdim=10 maxerr=6.54E-05 time=2.320
+After sweep 2 energy=-39.61936888836326  maxlinkdim=20 maxerr=8.95E-06 time=1.507
+After sweep 3 energy=-39.64688015212427  maxlinkdim=67 maxerr=1.09E-08 time=2.788
+After sweep 4 energy=-39.66769196131592  maxlinkdim=133 maxerr=9.93E-10 time=9.791
+After sweep 5 energy=-39.67261076741544  maxlinkdim=162 maxerr=1.00E-09 time=12.617
+After sweep 6 energy=-39.689949676535434  maxlinkdim=203 maxerr=1.00E-09 time=14.552
+After sweep 7 energy=-39.69632117879355  maxlinkdim=158 maxerr=9.99E-10 time=17.188
+After sweep 8 energy=-39.69644914314327  maxlinkdim=112 maxerr=1.00E-09 time=12.491
+After sweep 9 energy=-39.69644986321947  maxlinkdim=110 maxerr=9.91E-10 time=10.537
+After sweep 10 energy=-39.6964498672445  maxlinkdim=110 maxerr=9.85E-10 time=10.404
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-39.70018405417194, -39.69644986724448]

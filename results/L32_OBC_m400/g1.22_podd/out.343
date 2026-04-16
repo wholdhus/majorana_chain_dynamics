@@ -1,0 +1,28 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 32, bc = OBC, t = 1.0, g = 1.22, parity = -1, m = 400, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L32_OBC_m400/g1.22_podd/output.h5
+After sweep 1 energy=-43.66190852397355  maxlinkdim=10 maxerr=1.36E-04 time=37.825
+After sweep 2 energy=-43.7402133712322  maxlinkdim=20 maxerr=1.65E-05 time=2.096
+After sweep 3 energy=-44.366888789473464  maxlinkdim=67 maxerr=9.04E-08 time=3.923
+After sweep 4 energy=-44.373527590493005  maxlinkdim=134 maxerr=2.80E-09 time=10.998
+After sweep 5 energy=-44.374047995247786  maxlinkdim=201 maxerr=1.19E-09 time=17.652
+After sweep 6 energy=-44.37433255296348  maxlinkdim=195 maxerr=9.99E-10 time=21.379
+After sweep 7 energy=-44.374421222849264  maxlinkdim=166 maxerr=9.97E-10 time=19.547
+After sweep 8 energy=-44.374442484751334  maxlinkdim=146 maxerr=1.00E-09 time=18.561
+After sweep 9 energy=-44.37444527574046  maxlinkdim=143 maxerr=9.90E-10 time=17.183
+After sweep 10 energy=-44.3744455526269  maxlinkdim=143 maxerr=9.92E-10 time=17.408
+After sweep 11 energy=-44.37444558360274  maxlinkdim=143 maxerr=1.00E-09 time=17.251
+After sweep 12 energy=-44.37444558799539  maxlinkdim=142 maxerr=1.00E-09 time=16.953
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-43.644617157752855  maxlinkdim=10 maxerr=3.08E-04 time=3.935
+After sweep 2 energy=-43.73783666130937  maxlinkdim=20 maxerr=2.25E-05 time=2.594
+After sweep 3 energy=-44.330215074319945  maxlinkdim=67 maxerr=9.71E-07 time=4.725
+After sweep 4 energy=-44.37182960571708  maxlinkdim=134 maxerr=2.12E-09 time=13.000
+After sweep 5 energy=-44.371857050226396  maxlinkdim=145 maxerr=9.94E-10 time=19.564
+After sweep 6 energy=-44.37185727188322  maxlinkdim=145 maxerr=1.00E-09 time=20.493
+After sweep 7 energy=-44.3718572744752  maxlinkdim=145 maxerr=9.90E-10 time=20.928
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-44.37444558799539, -44.37185727447524]

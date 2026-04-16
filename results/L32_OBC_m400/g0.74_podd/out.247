@@ -1,0 +1,28 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 32, bc = OBC, t = 1.0, g = 0.74, parity = -1, m = 400, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L32_OBC_m400/g0.74_podd/output.h5
+After sweep 1 energy=-33.668198705480286  maxlinkdim=10 maxerr=1.38E-05 time=23.435
+After sweep 2 energy=-33.68866718689118  maxlinkdim=20 maxerr=1.62E-06 time=1.309
+After sweep 3 energy=-33.691768259056225  maxlinkdim=67 maxerr=2.99E-09 time=2.550
+After sweep 4 energy=-33.69237909967448  maxlinkdim=83 maxerr=9.98E-10 time=6.427
+After sweep 5 energy=-33.6923891370315  maxlinkdim=68 maxerr=9.98E-10 time=5.461
+After sweep 6 energy=-33.69238921060749  maxlinkdim=67 maxerr=9.99E-10 time=5.590
+After sweep 7 energy=-33.69238921123693  maxlinkdim=67 maxerr=1.00E-09 time=5.849
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-33.597481543149605  maxlinkdim=10 maxerr=3.15E-05 time=3.687
+After sweep 2 energy=-33.63867068526378  maxlinkdim=20 maxerr=2.09E-06 time=2.393
+After sweep 3 energy=-33.65097056822316  maxlinkdim=67 maxerr=1.98E-09 time=4.049
+After sweep 4 energy=-33.65117535537799  maxlinkdim=79 maxerr=1.00E-09 time=6.327
+After sweep 5 energy=-33.65277382562206  maxlinkdim=113 maxerr=1.00E-09 time=7.148
+After sweep 6 energy=-33.65942715543177  maxlinkdim=121 maxerr=9.99E-10 time=8.218
+After sweep 7 energy=-33.67162823643662  maxlinkdim=87 maxerr=9.98E-10 time=7.700
+After sweep 8 energy=-33.68559651832794  maxlinkdim=103 maxerr=9.98E-10 time=8.735
+After sweep 9 energy=-33.685915783893876  maxlinkdim=73 maxerr=9.98E-10 time=6.065
+After sweep 10 energy=-33.685917778743864  maxlinkdim=70 maxerr=9.95E-10 time=5.763
+After sweep 11 energy=-33.68591779230429  maxlinkdim=70 maxerr=9.91E-10 time=4.977
+After sweep 12 energy=-33.685917792385716  maxlinkdim=70 maxerr=9.89E-10 time=5.162
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-33.69238921123693, -33.68591779238571]
