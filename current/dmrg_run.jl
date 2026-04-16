@@ -23,9 +23,10 @@ function main()
     dmrg_tol           = get(dmrg_params, "dmrg_tol", 1e-8)
     eigsolve_krylovdim = get(dmrg_params, "eigsolve_krylovdim", 10)
     noise              = get(dmrg_params, "noise", [0.0])
+    weight             = get(dmrg_params, "weight", 100)
 
     println("Running DMRG with:")
-    println("  L = $L, bc = $bc, t = $t, g = $g, parity = $parity, m = $m, nstates = $nstates")
+    println("  L = $L, bc = $bc, t = $t, g = $g, parity = $parity, m = $m, nstates = $nstates, weight = $weight")
     println("  fname = $fname")
 
     get_energies_measure_save(L, bc, parity, t, g, nstates, fname;
@@ -34,7 +35,8 @@ function main()
                               nsweeps=nsweeps,
                               dmrg_tol=dmrg_tol,
                               eigsolve_krylovdim=eigsolve_krylovdim,
-                              noise=noise)
+                              noise=noise,
+                              weight=weight)
 end
 
 main()

@@ -13,9 +13,10 @@ cutoff     = 1e-9
 energy_tol = 1e-8
 noise      = [0.0]
 nstates    = 2
+weight     = 1000
 
-steps = 101
-gs = np.round(np.linspace(0.5, 1.5, steps), 4)
+steps = 201
+gs = np.round(np.linspace(-0.5, 1.5, steps), 4)
 
 parities = {"even": 1,
             "odd": -1}
@@ -41,6 +42,7 @@ for g in gs:
                                 "dmrg_tol": energy_tol,
                                 "noise": noise,
                                 "eigsolve_krylovdim": kdim,
+                                "weight": weight,
                                 }
                 }
         with open(dirname + "/input.yml", 'w') as f:
