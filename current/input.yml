@@ -1,0 +1,18 @@
+L: 4
+bc: OBC
+parity: 1
+t1: 1.0
+g: 0.5
+omega: 5.0
+periods: 3
+ac_site: 2
+fname: test_output.h5
+tebd_params:
+  maxdim: 20
+  steps_per_period: 5
+  corr_every: 1
+  cutoff: 1.0e-9
+  nsweeps: 10
+  dmrg_tol: 1.0e-8
+  eigsolve_krylovdim: 10
+  noise: [0.0]
