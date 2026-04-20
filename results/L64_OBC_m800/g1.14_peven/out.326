@@ -1,0 +1,28 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 64, bc = OBC, t = 1.0, g = 1.14, parity = 1, m = 800, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L64_OBC_m800/g1.14_peven/output.h5
+After sweep 1 energy=-86.12426473461352  maxlinkdim=10 maxerr=1.22E-05 time=28.066
+After sweep 2 energy=-86.13714671953426  maxlinkdim=20 maxerr=3.74E-07 time=3.521
+After sweep 3 energy=-86.13744243585096  maxlinkdim=52 maxerr=9.99E-10 time=5.613
+After sweep 4 energy=-86.13744352388709  maxlinkdim=58 maxerr=9.99E-10 time=8.510
+After sweep 5 energy=-86.13744354753557  maxlinkdim=59 maxerr=9.98E-10 time=8.591
+After sweep 6 energy=-86.13744354735657  maxlinkdim=59 maxerr=1.00E-09 time=8.332
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-85.11599490483279  maxlinkdim=10 maxerr=7.18E-05 time=3.672
+After sweep 2 energy=-85.4315006121828  maxlinkdim=20 maxerr=5.23E-06 time=3.209
+After sweep 3 energy=-85.45831791481179  maxlinkdim=78 maxerr=1.00E-09 time=6.412
+After sweep 4 energy=-85.45877011151364  maxlinkdim=104 maxerr=9.99E-10 time=14.631
+After sweep 5 energy=-85.45877592304251  maxlinkdim=107 maxerr=9.99E-10 time=18.144
+After sweep 6 energy=-85.45877659231044  maxlinkdim=107 maxerr=1.00E-09 time=19.370
+After sweep 7 energy=-85.45877685144187  maxlinkdim=108 maxerr=1.00E-09 time=20.361
+After sweep 8 energy=-85.45877710598974  maxlinkdim=111 maxerr=9.99E-10 time=20.403
+After sweep 9 energy=-85.45877743525533  maxlinkdim=115 maxerr=9.99E-10 time=21.970
+After sweep 10 energy=-85.45877759113392  maxlinkdim=117 maxerr=1.00E-09 time=22.644
+After sweep 11 energy=-85.45877763026128  maxlinkdim=118 maxerr=9.99E-10 time=22.746
+After sweep 12 energy=-85.45877764782122  maxlinkdim=119 maxerr=1.00E-09 time=22.961
+After sweep 13 energy=-85.4587776551784  maxlinkdim=119 maxerr=1.00E-09 time=23.568
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-86.13744354735657, -85.45877765517861]

@@ -1,0 +1,29 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 64, bc = OBC, t = 1.0, g = 1.44, parity = -1, m = 800, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L64_OBC_m800/g1.44_podd/output.h5
+After sweep 1 energy=-101.55176417447173  maxlinkdim=10 maxerr=2.00E-04 time=38.043
+After sweep 2 energy=-101.71270301344487  maxlinkdim=20 maxerr=9.83E-06 time=4.439
+After sweep 3 energy=-101.73236667500817  maxlinkdim=76 maxerr=9.99E-10 time=8.462
+After sweep 4 energy=-101.73245306433287  maxlinkdim=129 maxerr=1.00E-09 time=21.180
+After sweep 5 energy=-101.7324556939368  maxlinkdim=136 maxerr=1.00E-09 time=26.917
+After sweep 6 energy=-101.73245595823558  maxlinkdim=136 maxerr=1.00E-09 time=28.599
+After sweep 7 energy=-101.73245601374941  maxlinkdim=137 maxerr=9.99E-10 time=27.118
+After sweep 8 energy=-101.73245602801659  maxlinkdim=137 maxerr=9.98E-10 time=27.719
+After sweep 9 energy=-101.73245603846141  maxlinkdim=137 maxerr=9.97E-10 time=27.005
+After sweep 10 energy=-101.73245604037118  maxlinkdim=137 maxerr=9.99E-10 time=27.693
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-101.2947458518246  maxlinkdim=10 maxerr=1.38E-04 time=6.041
+After sweep 2 energy=-101.6936329565448  maxlinkdim=20 maxerr=7.77E-06 time=5.760
+After sweep 3 energy=-101.71395179340342  maxlinkdim=80 maxerr=9.96E-10 time=10.382
+After sweep 4 energy=-101.73157318238006  maxlinkdim=266 maxerr=1.41E-09 time=35.528
+After sweep 5 energy=-101.73245360873031  maxlinkdim=157 maxerr=9.99E-10 time=43.562
+After sweep 6 energy=-101.73245593293578  maxlinkdim=137 maxerr=9.98E-10 time=32.391
+After sweep 7 energy=-101.73245600124646  maxlinkdim=137 maxerr=9.97E-10 time=31.073
+After sweep 8 energy=-101.73245603045079  maxlinkdim=137 maxerr=1.00E-09 time=30.224
+After sweep 9 energy=-101.73245604356093  maxlinkdim=137 maxerr=1.00E-09 time=30.915
+After sweep 10 energy=-101.7324560477743  maxlinkdim=137 maxerr=9.98E-10 time=31.422
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-101.73245604777678, -101.73245604037118]

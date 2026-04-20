@@ -1,0 +1,28 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 64, bc = OBC, t = 1.0, g = 1.29, parity = 1, m = 800, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L64_OBC_m800/g1.29_peven/output.h5
+After sweep 1 energy=-93.08383453927358  maxlinkdim=10 maxerr=1.93E-04 time=53.442
+After sweep 2 energy=-93.27783076301247  maxlinkdim=20 maxerr=1.11E-05 time=5.680
+After sweep 3 energy=-93.85364368505746  maxlinkdim=78 maxerr=1.00E-09 time=10.000
+After sweep 4 energy=-93.88477739323588  maxlinkdim=68 maxerr=9.98E-10 time=15.357
+After sweep 5 energy=-93.88477766691611  maxlinkdim=68 maxerr=1.00E-09 time=16.799
+After sweep 6 energy=-93.88477768075761  maxlinkdim=69 maxerr=1.00E-09 time=17.103
+After sweep 7 energy=-93.8847776807145  maxlinkdim=69 maxerr=1.00E-09 time=17.446
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-93.11589151761862  maxlinkdim=10 maxerr=8.86E-05 time=7.654
+After sweep 2 energy=-93.26594482637753  maxlinkdim=20 maxerr=1.48E-05 time=6.415
+After sweep 3 energy=-93.29624528269753  maxlinkdim=80 maxerr=9.95E-10 time=11.789
+After sweep 4 energy=-93.3051357640715  maxlinkdim=238 maxerr=1.00E-09 time=39.854
+After sweep 5 energy=-93.30529160470473  maxlinkdim=185 maxerr=1.00E-09 time=50.233
+After sweep 6 energy=-93.30529953965058  maxlinkdim=182 maxerr=9.97E-10 time=45.987
+After sweep 7 energy=-93.3061263227856  maxlinkdim=288 maxerr=1.00E-09 time=59.232
+After sweep 8 energy=-93.31021772133546  maxlinkdim=267 maxerr=9.99E-10 time=104.253
+After sweep 9 energy=-93.31050243974518  maxlinkdim=172 maxerr=1.00E-09 time=77.366
+After sweep 10 energy=-93.31050796072526  maxlinkdim=138 maxerr=9.99E-10 time=46.587
+After sweep 11 energy=-93.31050802229218  maxlinkdim=132 maxerr=1.00E-09 time=42.302
+After sweep 12 energy=-93.31050801777124  maxlinkdim=130 maxerr=9.99E-10 time=41.702
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-93.8847776807145, -93.3105080177712]

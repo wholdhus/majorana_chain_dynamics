@@ -1,0 +1,38 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 64, bc = OBC, t = 1.0, g = 0.92, parity = -1, m = 800, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L64_OBC_m800/g0.92_podd/output.h5
+After sweep 1 energy=-74.78311687348419  maxlinkdim=10 maxerr=1.12E-04 time=33.318
+After sweep 2 energy=-74.81165257559816  maxlinkdim=20 maxerr=2.76E-06 time=3.653
+After sweep 3 energy=-74.81251303701411  maxlinkdim=63 maxerr=1.00E-09 time=6.612
+After sweep 4 energy=-75.16119795499334  maxlinkdim=134 maxerr=9.98E-10 time=15.009
+After sweep 5 energy=-75.30261316147143  maxlinkdim=124 maxerr=1.00E-09 time=20.039
+After sweep 6 energy=-75.30264204904387  maxlinkdim=84 maxerr=1.00E-09 time=11.449
+After sweep 7 energy=-75.30264410529472  maxlinkdim=83 maxerr=9.99E-10 time=11.217
+After sweep 8 energy=-75.30264453004833  maxlinkdim=83 maxerr=9.96E-10 time=11.810
+After sweep 9 energy=-75.30264649999225  maxlinkdim=83 maxerr=9.97E-10 time=11.830
+After sweep 10 energy=-75.30265369141281  maxlinkdim=84 maxerr=9.98E-10 time=12.310
+After sweep 11 energy=-75.3026654316362  maxlinkdim=85 maxerr=9.99E-10 time=13.546
+After sweep 12 energy=-75.30267828735417  maxlinkdim=86 maxerr=9.98E-10 time=14.714
+After sweep 13 energy=-75.30269129438437  maxlinkdim=87 maxerr=9.97E-10 time=15.857
+After sweep 14 energy=-75.30270119843144  maxlinkdim=88 maxerr=9.99E-10 time=16.289
+After sweep 15 energy=-75.30270857349605  maxlinkdim=88 maxerr=1.00E-09 time=16.913
+After sweep 16 energy=-75.30271359499024  maxlinkdim=88 maxerr=9.99E-10 time=17.377
+After sweep 17 energy=-75.3027171847662  maxlinkdim=88 maxerr=1.00E-09 time=17.119
+After sweep 18 energy=-75.30271945228904  maxlinkdim=88 maxerr=1.00E-09 time=17.277
+After sweep 19 energy=-75.30272091560984  maxlinkdim=88 maxerr=9.99E-10 time=17.380
+After sweep 20 energy=-75.30272189560152  maxlinkdim=88 maxerr=9.99E-10 time=18.094
+After sweep 1 energy=-74.29644406302415  maxlinkdim=10 maxerr=9.14E-05 time=5.507
+After sweep 2 energy=-74.36750009318969  maxlinkdim=20 maxerr=1.35E-05 time=4.737
+After sweep 3 energy=-74.86796729270812  maxlinkdim=77 maxerr=1.00E-09 time=8.910
+After sweep 4 energy=-75.3024052400932  maxlinkdim=102 maxerr=9.99E-10 time=19.252
+After sweep 5 energy=-75.30254906255256  maxlinkdim=88 maxerr=9.98E-10 time=23.886
+After sweep 6 energy=-75.30256201602288  maxlinkdim=88 maxerr=9.98E-10 time=22.925
+After sweep 7 energy=-75.30256328521241  maxlinkdim=88 maxerr=9.99E-10 time=22.132
+After sweep 8 energy=-75.30256341828168  maxlinkdim=88 maxerr=1.00E-09 time=22.727
+After sweep 9 energy=-75.30256342953166  maxlinkdim=88 maxerr=9.98E-10 time=22.650
+After sweep 10 energy=-75.30256343132876  maxlinkdim=88 maxerr=9.98E-10 time=21.926
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-75.30272189560152, -75.3025634313291]

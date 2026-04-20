@@ -1,0 +1,16 @@
+L: 64
+bc: OBC
+parity: -1
+t: 1.0
+g: 0.08
+nstates: 2
+fname: /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L64_OBC_m800/g0.08_podd/output.h5
+dmrg_params:
+  m: 800
+  nsweeps: 20
+  cutoff: 1.0e-09
+  dmrg_tol: 1.0e-08
+  noise:
+  - 0.0
+  eigsolve_krylovdim: 15
+  weight: 1000

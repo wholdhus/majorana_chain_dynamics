@@ -1,0 +1,29 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 64, bc = OBC, t = 1.0, g = 1.09, parity = 1, m = 800, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L64_OBC_m800/g1.09_peven/output.h5
+After sweep 1 energy=-81.67413104845717  maxlinkdim=10 maxerr=2.51E-04 time=25.330
+After sweep 2 energy=-82.87059225130061  maxlinkdim=20 maxerr=3.07E-05 time=2.543
+After sweep 3 energy=-83.65598409700381  maxlinkdim=79 maxerr=9.98E-10 time=5.241
+After sweep 4 energy=-83.65685657049356  maxlinkdim=55 maxerr=9.99E-10 time=6.406
+After sweep 5 energy=-83.65685667473967  maxlinkdim=55 maxerr=9.98E-10 time=6.242
+After sweep 6 energy=-83.65685667825792  maxlinkdim=55 maxerr=9.99E-10 time=7.024
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-82.87367471496638  maxlinkdim=10 maxerr=2.02E-04 time=3.706
+After sweep 2 energy=-82.92174744782544  maxlinkdim=20 maxerr=1.46E-05 time=3.312
+After sweep 3 energy=-82.9300272093139  maxlinkdim=79 maxerr=1.00E-09 time=5.822
+After sweep 4 energy=-82.9309618159722  maxlinkdim=149 maxerr=1.00E-09 time=16.288
+After sweep 5 energy=-82.9309963517518  maxlinkdim=155 maxerr=1.00E-09 time=22.158
+After sweep 6 energy=-82.93108998679337  maxlinkdim=158 maxerr=9.99E-10 time=26.508
+After sweep 7 energy=-82.93474499030033  maxlinkdim=227 maxerr=1.00E-09 time=51.615
+After sweep 8 energy=-82.93585900662427  maxlinkdim=156 maxerr=9.99E-10 time=59.035
+After sweep 9 energy=-82.93590370434221  maxlinkdim=124 maxerr=1.00E-09 time=26.571
+After sweep 10 energy=-82.93590430962347  maxlinkdim=118 maxerr=1.00E-09 time=22.852
+After sweep 11 energy=-82.93590466193659  maxlinkdim=117 maxerr=1.00E-09 time=23.661
+After sweep 12 energy=-82.93590475185685  maxlinkdim=116 maxerr=9.97E-10 time=23.636
+After sweep 13 energy=-82.93590477244187  maxlinkdim=116 maxerr=9.99E-10 time=29.254
+After sweep 14 energy=-82.93590477512518  maxlinkdim=116 maxerr=9.96E-10 time=28.684
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-83.65685667825792, -82.93590477512564]

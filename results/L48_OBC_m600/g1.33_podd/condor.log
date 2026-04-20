@@ -1,0 +1,52 @@
+000 (6919.365.000) 2026-04-16 09:41:22 Job submitted from host: <140.160.143.131:9618?addrs=140.160.143.131-9618&alias=cse-head.cluster.cs.wwu.edu&noUDP&sock=schedd_1483_cb0a>
+...
+001 (6919.365.000) 2026-04-16 13:40:38 Job executing on host: <140.160.143.184:9618?addrs=140.160.143.184-9618&alias=c-0-15.cluster.cs.wwu.edu&noUDP&sock=startd_1429_c0ed>
+	SlotName: slot1_3@c-0-15.cluster.cs.wwu.edu
+	CondorScratchDir = "/var/lib/condor/execute/dir_16786"
+	Cpus = 8
+	Disk = 2048
+	GPUs = 0
+	Memory = 6144
+...
+006 (6919.365.000) 2026-04-16 13:40:47 Image size of job updated: 361400
+	353  -  MemoryUsage of job (MB)
+	361400  -  ResidentSetSize of job (KB)
+...
+006 (6919.365.000) 2026-04-16 13:45:48 Image size of job updated: 872660
+	757  -  MemoryUsage of job (MB)
+	774928  -  ResidentSetSize of job (KB)
+...
+006 (6919.365.000) 2026-04-16 13:50:48 Image size of job updated: 1072588
+	1048  -  MemoryUsage of job (MB)
+	1072588  -  ResidentSetSize of job (KB)
+...
+006 (6919.365.000) 2026-04-16 13:55:49 Image size of job updated: 1140512
+	1110  -  MemoryUsage of job (MB)
+	1136424  -  ResidentSetSize of job (KB)
+...
+006 (6919.365.000) 2026-04-16 14:00:49 Image size of job updated: 1170584
+	1139  -  MemoryUsage of job (MB)
+	1165748  -  ResidentSetSize of job (KB)
+...
+006 (6919.365.000) 2026-04-16 14:03:43 Image size of job updated: 1170584
+	1139  -  MemoryUsage of job (MB)
+	1165752  -  ResidentSetSize of job (KB)
+...
+005 (6919.365.000) 2026-04-16 14:03:43 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 01:57:45, Sys 0 00:00:45  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 01:57:45, Sys 0 00:00:45  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :     7.11        8         8 
+	   Disk (KB)            :     1           1      2048 
+	   GPUs                 :                           0 
+	   Memory (MB)          :  1139        6144      6144 
+	   TimeExecute (s)      :  1385                       
+	   TimeSlotBusy (s)     :  1385                       
+...

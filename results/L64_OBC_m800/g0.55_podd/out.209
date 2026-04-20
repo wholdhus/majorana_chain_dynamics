@@ -1,0 +1,28 @@
+Starting conda?
+Starting Julia?
+Reading parameters from input.yml
+Running DMRG with:
+  L = 64, bc = OBC, t = 1.0, g = 0.55, parity = -1, m = 800, nstates = 2, weight = 1000
+  fname = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L64_OBC_m800/g0.55_podd/output.h5
+After sweep 1 energy=-63.51882314206129  maxlinkdim=10 maxerr=5.41E-06 time=21.794
+After sweep 2 energy=-63.52690127498474  maxlinkdim=20 maxerr=1.13E-07 time=2.527
+After sweep 3 energy=-63.698486210860615  maxlinkdim=53 maxerr=1.00E-09 time=3.745
+After sweep 4 energy=-63.69907299790912  maxlinkdim=26 maxerr=9.99E-10 time=3.374
+After sweep 5 energy=-63.69907302897414  maxlinkdim=26 maxerr=9.99E-10 time=3.112
+After sweep 6 energy=-63.699073028436516  maxlinkdim=26 maxerr=9.91E-10 time=3.082
+Energy difference less than 1.0e-8, stopping DMRG
+After sweep 1 energy=-63.517783123909695  maxlinkdim=10 maxerr=4.68E-06 time=3.234
+After sweep 2 energy=-63.52633542461707  maxlinkdim=20 maxerr=1.73E-07 time=2.780
+After sweep 3 energy=-63.52884677295272  maxlinkdim=57 maxerr=9.97E-10 time=3.957
+After sweep 4 energy=-63.52931193271243  maxlinkdim=43 maxerr=9.99E-10 time=5.513
+After sweep 5 energy=-63.5293192887006  maxlinkdim=40 maxerr=9.99E-10 time=4.666
+After sweep 6 energy=-63.529319481297605  maxlinkdim=40 maxerr=9.96E-10 time=4.458
+After sweep 7 energy=-63.52931958341032  maxlinkdim=40 maxerr=1.00E-09 time=4.622
+After sweep 8 energy=-63.52931965171097  maxlinkdim=40 maxerr=1.00E-09 time=4.545
+After sweep 9 energy=-63.529319701738245  maxlinkdim=40 maxerr=1.00E-09 time=4.503
+After sweep 10 energy=-63.529319732698355  maxlinkdim=40 maxerr=9.94E-10 time=4.490
+After sweep 11 energy=-63.52931975376259  maxlinkdim=40 maxerr=9.98E-10 time=4.513
+After sweep 12 energy=-63.52931977022368  maxlinkdim=40 maxerr=9.97E-10 time=4.576
+After sweep 13 energy=-63.52931978005281  maxlinkdim=40 maxerr=9.99E-10 time=4.555
+Energy difference less than 1.0e-8, stopping DMRG
+Energies: [-63.699073028436516, -63.52931978005305]

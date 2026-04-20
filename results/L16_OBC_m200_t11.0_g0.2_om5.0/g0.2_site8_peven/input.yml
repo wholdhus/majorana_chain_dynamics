@@ -1,0 +1,19 @@
+L: 16
+bc: OBC
+parity: 1
+t1: 1.0
+g: 0.2
+omega: 5.0
+periods: 5
+ac_site: 8
+fname: /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L16_OBC_m200_t11.0_g0.2_om5.0/g0.2_site8_peven/output.h5
+tebd_params:
+  maxdim: 200
+  steps_per_period: 10
+  corr_every: 5
+  cutoff: 1.0e-09
+  nsweeps: 20
+  dmrg_tol: 1.0e-08
+  eigsolve_krylovdim: 15
+  noise:
+  - 0.0

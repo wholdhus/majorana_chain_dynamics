@@ -1,0 +1,48 @@
+000 (6919.355.000) 2026-04-16 09:41:22 Job submitted from host: <140.160.143.131:9618?addrs=140.160.143.131-9618&alias=cse-head.cluster.cs.wwu.edu&noUDP&sock=schedd_1483_cb0a>
+...
+001 (6919.355.000) 2026-04-16 13:27:59 Job executing on host: <140.160.143.144:9618?addrs=140.160.143.144-9618&alias=c-0-4.cluster.cs.wwu.edu&noUDP&sock=startd_1367_3a0d>
+	SlotName: slot1_3@c-0-4.cluster.cs.wwu.edu
+	CondorScratchDir = "/var/lib/condor/execute/dir_1069054"
+	Cpus = 8
+	Disk = 2048
+	GPUs = 0
+	Memory = 6144
+...
+006 (6919.355.000) 2026-04-16 13:28:07 Image size of job updated: 103420
+	101  -  MemoryUsage of job (MB)
+	103420  -  ResidentSetSize of job (KB)
+...
+006 (6919.355.000) 2026-04-16 13:33:07 Image size of job updated: 702948
+	687  -  MemoryUsage of job (MB)
+	702948  -  ResidentSetSize of job (KB)
+...
+006 (6919.355.000) 2026-04-16 13:38:08 Image size of job updated: 983964
+	959  -  MemoryUsage of job (MB)
+	981684  -  ResidentSetSize of job (KB)
+...
+006 (6919.355.000) 2026-04-16 13:43:08 Image size of job updated: 1089012
+	1062  -  MemoryUsage of job (MB)
+	1087008  -  ResidentSetSize of job (KB)
+...
+006 (6919.355.000) 2026-04-16 13:46:35 Image size of job updated: 1101716
+	1062  -  MemoryUsage of job (MB)
+	1087008  -  ResidentSetSize of job (KB)
+...
+005 (6919.355.000) 2026-04-16 13:46:35 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 01:09:48, Sys 0 00:00:32  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 01:09:48, Sys 0 00:00:32  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	0  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :     6.02        8         8 
+	   Disk (KB)            :     1           1      2048 
+	   GPUs                 :                           0 
+	   Memory (MB)          :  1062        6144      6144 
+	   TimeExecute (s)      :  1116                       
+	   TimeSlotBusy (s)     :  1116                       
+...
