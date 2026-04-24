@@ -3,6 +3,19 @@ using LinearAlgebra
 using YAML
 include("operators.jl")
 
+function entropy(state, bond)
+    s_orth = orthogonalize(state, bond)
+    U,S,V = svd(s_orth[bond],
+                (linkinds(s_orth, bond-1)...,
+                 siteinds(s_orth, bond)...))
+    SvN = 0.0
+    for n=1:dim(S, 1)
+        p = S[n,n]^2
+        SvN -= p * log(p)
+    end
+    return SvN
+end
+
 function build_trotter_gates(sites, tau, t1, g, bc)
     L = length(sites)
     gates = ITensor[]
@@ -118,6 +131,7 @@ function tebd_evolve(L, bc, parity, t1, g, omega, periods, ac_site, fname;
     XX_t = zeros(Float64, nmeas, L, L)
     YY_t = zeros(Float64, nmeas, L, L)
     ZZ_t = zeros(Float64, nmeas, L, L)
+    entropy_t = zeros(Float64, nmeas)
 
     # Build instantaneous H(t)
     function H_of_t(t)
@@ -132,6 +146,7 @@ function tebd_evolve(L, bc, parity, t1, g, omega, periods, ac_site, fname;
         XX_t[k, :, :] = real.(correlation_matrix(psi, "X", "X"))
         YY_t[k, :, :] = real.(correlation_matrix(psi, "Y", "Y"))
         ZZ_t[k, :, :] = real.(correlation_matrix(psi, "Z", "Z"))
+        entropy_t[k]  = entropy(psi, L÷2)
     end
 
     # Initial state measurements
@@ -223,6 +238,7 @@ function tebd_evolve(L, bc, parity, t1, g, omega, periods, ac_site, fname;
         fid["XX_t"]           = XX_t
         fid["YY_t"]           = YY_t
         fid["ZZ_t"]           = ZZ_t
+        fid["entropy_t"]      = entropy_t
     end
     println("Saved to $fname")
 end
