@@ -7,7 +7,7 @@ import yaml
 Ls       = [24, 32, 48]
 maxdims  = [200, 400, 800]
 bcs      = ["OBC", "PBC"]
-omegas   = [0.1, 1.0, 10.0, 100.0]
+omegas   = [1.0, 10.0, 100.0]  # omega = 0.1 handled in separate low-frequency batch
 gs       = np.round(np.linspace(0.0, 2.0, 21), 4)
 parities = {"even": 1, "odd": -1}
 
@@ -15,11 +15,10 @@ parities = {"even": 1, "odd": -1}
 t1            = 1.0
 periods       = 20
 tau_target    = 0.05
-min_sp        = 10   # Floor at 10 steps/period when high-frequency
-max_sp        = 200  # Cap on low-frequency end; tau grows above tau_target there
-corr_every    = 1
+min_sp        = 10   # floor at 10 steps/period in high-frequency regime
+corr_every    = 2    # every other Trotter step is sufficient
 
-# DMRG ground-state parameters (used inside TEBD)
+# DMRG parameters (used inside TEBD)
 cutoff             = 1e-9
 nsweeps            = 20
 dmrg_tol           = 1e-8
@@ -39,9 +38,10 @@ os.makedirs(cwd, exist_ok=True)
 
 # Helpers
 def steps_per_period(omega):
-    # Using N = int(2*pi/(omega*tau)) from the whiteboard with min_sp and max_sp
+    # N = int(2*pi/(omega*tau)) from the whiteboard
+    # min_sp (resolve oscillation at high omega)
     n = int(2 * math.pi / (omega * tau_target))
-    return max(min_sp, min(n, max_sp))
+    return max(min_sp, n)
 
 def ac_sites_for(L, bc):
     if bc == "OBC":
@@ -50,10 +50,15 @@ def ac_sites_for(L, bc):
         return [1, L // 2]
 
 def mem_gb(L, maxdim):
-    # RAM scales as L * maxdim^2.
+    # Scales as L * maxdim^2.
     return max(4, math.ceil(2.5e-7 * L * maxdim**2))
 
-# Main loop: handles one batch folder per (L, maxdim, bc)
+def priority_for(L, maxdim):
+    # Higher priority = scheduled first
+    # Lighter jobs go first so they don't get stuck behind the heavy ones
+    return max(0, 30 - int(math.log2(L * maxdim**2 / (24 * 200**2)) * 5))
+
+# Main loop: one batch folder per (L, maxdim, bc)
 for L in Ls:
     for maxdim in maxdims:
         for bc in bcs:
@@ -101,7 +106,8 @@ for L in Ls:
 
             # Write the matching HTCondor .batch file
             batch_file = os.path.join(cwd, f"{batch_folder}.batch")
-            mem = mem_gb(L, maxdim)
+            mem  = mem_gb(L, maxdim)
+            prio = priority_for(L, maxdim)
             with open(batch_file, "w") as f:
                 f.write(
                     f"Universe   = vanilla\n"
@@ -111,11 +117,11 @@ for L in Ls:
                     f"Log        = condor.log\n"
                     f"Request_Cpus   = {request_cpus}\n"
                     f"Request_Memory = {mem}GB\n"
-                    f"Priority = 5\n"
+                    f"Priority = {prio}\n"
                     f"Initialdir = $(dirname)\n"
                     f"Queue dirname matching dirs {batch_root}/{parent_folder}/{batch_folder}/*\n"
                 )
 
-            print(f"{batch_folder}: {njobs} jobs, {mem} GB requested")
+            print(f"{batch_folder}: {njobs} jobs, {mem} GB, priority {prio}")
 
 print("Done.")
