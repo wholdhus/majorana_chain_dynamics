@@ -115,12 +115,12 @@ function tebd_sim(L, bc, t1, g, omega, periods, op_str, ind;
 
     H0 = make_H0(L, sites, bc)
     H3 = make_H3(L, sites, bc)
-    H = 2*t1*H0 + g*H3
+    H = t1*H0 + g*H3
     
     state = ["Up" for n=1:L]
     if parity == -1
         println("Changing to odd parity")
-        state[1] = "Dwn"
+        state[1] = "Down"
     end
     psi0 = random_mps(sites, state, linkdims=4)
     
