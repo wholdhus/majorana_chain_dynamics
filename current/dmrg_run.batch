@@ -1,0 +1,10 @@
+Universe   = vanilla
+Executable = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/dmrg_run.sh
+Output     = out.$(Process)
+Error      = err.$(Process)
+Log        = condor.log
+Request_Cpus   = 8
+Request_Memory = 4GB
+Priority = 5
+Initialdir = $(dirname)
+Queue dirname matching dirs /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L32_OBC_m400/*
