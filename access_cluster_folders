@@ -1,0 +1,3 @@
+I think this command allows everyone access to the folder:
+
+chmod -R o+rx /cluster/research-groups/rahmani/USER/FOLDER-PATH
