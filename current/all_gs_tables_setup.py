@@ -9,8 +9,8 @@ import yaml
 PARENT = "tebd_batches_2026-05"
 
 # Absolute cluster paths baked into the generated .batch files.
-EXEC_PATH  = "/cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/dmrg_run.sh"
-BATCH_ROOT = "/cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current"
+EXEC_PATH  = "/cluster/research-groups/rahmani/Jack/dmrg_run.sh"
+BATCH_ROOT = "/cluster/research-groups/rahmani/Jack"
 
 # DMRG params for the lookup table (ground state only)
 KDIM       = 15
@@ -21,7 +21,7 @@ NOISE      = [0.0]
 NSTATES    = 1
 WEIGHT     = 1000
 
-REQUEST_CPUS  = 4
+REQUEST_CPUS  = 2
 PARITY_LABEL  = {1: "even", -1: "odd"}
 
 TABLE_PRIORITY = 100

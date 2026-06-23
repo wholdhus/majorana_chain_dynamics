@@ -4,7 +4,7 @@ import numpy as np
 import yaml
 
 # Sweep configuration
-Ls       = [24, 32, 48]
+Ls       = [4]
 maxdims  = [200, 400, 800]
 bcs      = ["OBC", "PBC"]
 omegas   = [1.0, 10.0, 100.0]  # omega = 0.1 handled in separate low-frequency batch
@@ -26,10 +26,10 @@ eigsolve_krylovdim = 15
 noise              = [0.0]
 
 # Cluster parameters
-request_cpus  = 8
-julia_threads = 8
-exec_path     = "/cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/tebd_run.sh"
-batch_root    = "/cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current"
+request_cpus  = 2
+julia_threads = 2
+exec_path     = "/cluster/research-groups/rahmani/Jack/tebd_run.sh"
+batch_root    = "/cluster/research-groups/rahmani/Jack"
 parent_folder = "tebd_batches_2026-05"
 
 cwd = os.path.join(os.getcwd(), parent_folder)

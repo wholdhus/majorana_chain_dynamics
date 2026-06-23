@@ -5,7 +5,7 @@ import yaml
 cwd = os.getcwd()
 
 # Parameters should match the TEBD run we want excess energy for
-L                = 32
+L                = 4
 bc               = "OBC"
 t1               = 1.0
 omega            = 5.0

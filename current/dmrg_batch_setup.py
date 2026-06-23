@@ -4,7 +4,7 @@ import yaml
 
 cwd = os.getcwd()
 
-L          = 64
+L          = 4
 maxdim     = 800
 bc         = "OBC"
 kdim       = 15

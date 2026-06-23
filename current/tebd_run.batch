@@ -1,10 +1,10 @@
 Universe   = vanilla
-Executable = /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/tebd_run.sh
+Executable = /cluster/research-groups/rahmani/Jack/tebd_run.sh
 Output     = out.$(Process)
 Error      = err.$(Process)
 Log        = condor.log
-Request_Cpus   = 8
-Request_Memory = 4GB
+Request_Cpus   = 2
+Request_Memory = 2GB
 Priority = 5
 Initialdir = $(dirname)
-Queue dirname matching dirs /cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/L32_OBC_m400_t1_1.0_om5.0/*
+Queue dirname matching dirs /cluster/research-groups/rahmani/Jack/L4_OBC_m400_t1_1.0_om5.0/*
