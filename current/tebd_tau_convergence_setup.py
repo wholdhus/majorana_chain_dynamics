@@ -1,12 +1,12 @@
 import os
 import yaml
 
-configs  = [(24, 400, 1e-9, 4)]
+configs  = [(14, 400, 1e-9, 4), (12, 400, 1e-9, 20)] # (L, maxdim, cutoff, periods)
 bc       = "OBC"
 omega    = 0.1
-gs       = [0.2, 1.0]
-parities = {"even": 1, "odd": -1}
-sps      = [1280, 640, 320, 160] # steps per period
+gs       = [0.2, 1.0, 2.0]
+parities = {"even": 1}
+sps      = [3840, 1920, 1280, 960, 640, 480] # steps per period
 
 t1         = 1.0
 
@@ -18,12 +18,12 @@ noise              = [0.0]
 request_cpus  = 8
 request_mem   = 8
 exec_path     = "/cluster/research-groups/rahmani/Liam/majorana_chain_dynamics/current/tebd_run.sh"
-parent_folder = "tebd_tau_convergence_2026-09"
+parent_folder = "tebd_tau_convergence_2026-10"
 
 root = os.path.abspath(parent_folder)
 
 for L, maxdim, cutoff, periods in configs:
-    batch_folder = f"L{L}_{bc}_m{maxdim}_om{omega}_tau_convergence"
+    batch_folder = f"L{L}_{bc}_m{maxdim}_om{omega}_{periods}periods_tau_convergence"
     batch_path   = os.path.join(root, batch_folder)
     site = L // 2
     dirs = []

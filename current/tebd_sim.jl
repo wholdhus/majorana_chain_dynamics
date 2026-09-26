@@ -38,9 +38,9 @@ function build_trotter_gates(sites, tau, t1, g, bc)
         H = local_H(t1, g, sites[L], sites[1], sites[2], signs=[1.0, -1.0, 1.0, -1.0])
         push!(gates, exp(-im * tau/2 * H))
     else  # OBC: zero out boundary couplings
-        H = local_H(t1, g, sites[L-1], sites[L], sites[1], signs=[1.0, 1.0, 0.0, 0.0])
+        H = -t1*(op("Z", sites[L-1]) * op("Id", sites[L]) + op("X", sites[L-1]) * op("X", sites[L]))
         push!(gates, exp(-im * tau/2 * H))
-        H = local_H(t1, g, sites[L], sites[1], sites[2], signs=[1.0, 0.0, 0.0, 0.0])
+        H = -t1*op("Z", sites[L])
         push!(gates, exp(-im * tau/2 * H))
     end
 
@@ -193,6 +193,7 @@ function tebd_evolve(L, bc, parity, t1, g, omega, periods, ac_site, fname;
         println("  |<psi(t)|psi(0)>|^2 = $(loschmidt[i+1])")
         println("  <H(t)> = $(energy_t[i+1])  <H(0)> = $(energy_0[i+1])")
         println("  maxlinkdim(psi_t) = $(maxdims[i+1])")
+        flush(stdout)
 
         if i in meas_steps
             measure_corrs!(meas_idx, psi_t)
