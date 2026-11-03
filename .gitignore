@@ -3,3 +3,8 @@
 *.png
 results/*
 !results/*.ipynb
+*.h5
+tebd_batches_*/
+*_gs_table/
+tebd_summaries/
+trotter_*/
