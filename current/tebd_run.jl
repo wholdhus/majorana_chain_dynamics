@@ -27,11 +27,12 @@ function main()
     dmrg_tol           = get(tebd_params, "dmrg_tol", 1e-8)
     eigsolve_krylovdim = get(tebd_params, "eigsolve_krylovdim", 10)
     noise              = get(tebd_params, "noise", [0.0])
+    h3_only            = get(tebd_params, "h3_only", false)
 
     println("Running TEBD with:")
     println("  L=$L, bc=$bc, parity=$parity, t1=$t1, g=$g, omega=$omega")
     println("  periods=$periods, steps_per_period=$steps_per_period, ac_site=$ac_site")
-    println("  maxdim=$maxdim, corr_every=$corr_every")
+    println("  maxdim=$maxdim, corr_every=$corr_every, h3_only=$h3_only")
     println("  fname=$fname")
 
     tebd_evolve(L, bc, parity, t1, g, omega, periods, ac_site, fname;
@@ -42,7 +43,8 @@ function main()
                 dmrg_tol=dmrg_tol,
                 maxdim=maxdim,
                 eigsolve_krylovdim=eigsolve_krylovdim,
-                noise=noise)
+                noise=noise,
+                h3_only=h3_only)
 end
 
 main()

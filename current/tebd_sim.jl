@@ -57,7 +57,8 @@ function tebd_evolve(L, bc, parity, t1, g, omega, periods, ac_site, fname;
                      dmrg_tol=1e-8,
                      maxdim=100,
                      eigsolve_krylovdim=10,
-                     noise=[0.0])
+                     noise=[0.0],
+                     h3_only=false)
 
     if Threads.nthreads() > 1
         BLAS.set_num_threads(1)
@@ -98,7 +99,7 @@ function tebd_evolve(L, bc, parity, t1, g, omega, periods, ac_site, fname;
 
     # Midpoint times within one period (for gate construction)
     midpoints = [tau*(n - 0.5) for n in 1:steps_per_period]
-    drive_t1(t) = t1 * cos(omega * t)
+    drive_t1(t) = h3_only ? 0.0 : t1 * cos(omega * t)
 
     # Pre-compute gate sets for each sub-step in one period
     gate_sets = [build_trotter_gates(sites, tau, drive_t1(t), g, bc) for t in midpoints]
@@ -135,7 +136,7 @@ function tebd_evolve(L, bc, parity, t1, g, omega, periods, ac_site, fname;
 
     # Build instantaneous H(t)
     function H_of_t(t)
-        return drive_t1(t)*H0_mpo + g*H3_mpo
+        return h3_only ? g*H3_mpo : drive_t1(t)*H0_mpo + g*H3_mpo
     end
 
     # Measure correlations into row k of the arrays
@@ -213,6 +214,7 @@ function tebd_evolve(L, bc, parity, t1, g, omega, periods, ac_site, fname;
         fid["steps_per_period"] = steps_per_period
         fid["ac_site"]        = ac_site
         fid["corr_every"]     = corr_every
+        fid["h3_only"]        = Int(h3_only)
         fid["E0_dmrg"]        = E0
 
         # Time axes
